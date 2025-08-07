@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments::resources}">
+
+  <title>Settings</title>
+</head>
+<body>
+
+
+<div th:replace="~{fragments :: navbar}"></div>
+
+<main>
+  <div th:if="${session.user != null}" class="border-wrapper" >
+    <div class="main-wrapper">
+      <p th:replace="~{fragments :: table_head}"></p>
+      <div class="content-wrapper">
+        <div th:replace=" ~{fragments :: role-buttons}"></div>
+        <div style="padding:5vw;" class="forms">
+          <form th:replace="~{fragments :: settings_form}">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+</body>
+</html>

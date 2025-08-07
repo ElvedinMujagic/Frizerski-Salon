@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+  <html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head th:fragment="resources">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/new-style.css">
+    <link rel="stylesheet" href="/css/tables.css">
+    <script th:if="${session.user != null }" th:src="@{/js/dropdowns.js}"></script>
+    <script th:if="${session.user == null }" th:src="@{/js/scripts.js}"></script>
+  </head>
+<body>
+
+  <!-- Navigation bar Fragment-->
+  <nav th:fragment="navbar" class="navbar">
+    <div class="nav-left">
+      <img th:src="@{/images/Logo.png}" alt="Logo">
+    </div>
+
+    <div class="nav-right-wrapper">
+      <div class="links">
+        <ul>
+          <li><a href="/info/onama">O nama</a></li>
+          <li><a href="/info/kontakt">Kontakt</a></li>
+          <li><a href="/info/cijene">Cijene</a></li>
+          <li><a href="/info/termini">Termini</a></li>
+        </ul>
+      </div>
+      <!-- Ako nije prijavljen korisnik prikaži Login/Registracija -->
+      <div th:if="${session.user == null}">
+        <button style="margin-right: 5px;" class="login" id="LoginBtn">Prijavi se</button>
+        <button style="margin-left: 5px;" class="login" id="RegisterBtn">Registracija</button>
+
+        <!-- Login Popup Fragment -->
+        <div th:fragment="loginPopup" class="pop-up-overlay" id="LoginPopupOverlay">
+          <div class="popup" id="LoginPopup">
+            <div class="pop-up-content">
+              <form id="Login-Form">
+                <div class="form">
+                  <div class="form-header">
+                    <img src="/images/Logo.png" width="100" height="75" alt="Logo"/>
+                    <h1>Prijavi se</h1>
+                  </div>
+                  <div class="form-input">
+                    <label>Naziv profila</label>
+                    <input type="text" name="username" id="login-username" placeholder="Username">
+                  </div>
+                  <div class="form-input">
+                    <label>Password</label>
+                    <input type="password" name="password" id="login-password" placeholder="Password">
+                  </div>
+                  <div class="form-checkbox">
+                    <input type="checkbox" id="remember-me">
+                    <label>Zapamti me</label>
+                    <a href="#">Zaboravili ste šifru?</a>
+                  </div>
+                  <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
+                       class="error-style" id="error-login">Test</div>
+                  <div class="form-submit">
+                    <button>Prijavi se</button>
+                  </div>
+                  <div class="alternative-login">
+                    <hr>
+                    <div class="form-submit">
+                      <button>Gmail</button>
+                    </div>
+                    <div class="form-submit">
+                      <button>Mac</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Register Popup Fragment -->
+        <div th:fragment="registerPopup" class="pop-up-overlay" id="RegisterPopupOverlay">
+          <div class="popup" id="dimensions">
+            <div class="pop-up-content">
+              <form id="Register-Form">
+                <div class="form">
+                  <div class="form-header">
+                    <img src="/images/Logo.png" width="100" height="75" alt="Logo"/>
+                    <h1>Registracija</h1>
+                  </div>
+                  <div class="form-input">
+                    <div class="licni-podatci">
+                      <label>Ime</label>
+                      <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
+                           class="error-style" id="error-ime-register"></div>
+                      <input type="text" name="ime" id="ime"
+                             maxlength="15" placeholder="Unesite svoje ime">
+                    </div>
+                  </div>
+                  <div class="form-input">
+                    <div class="licni-podatci">
+                      <label>Prezime</label>
+                      <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
+                           class="error-style" id="error-prezime"></div>
+                      <input type="text" name="prezime" id="prezime"
+                             maxlength="15"
+                             placeholder="Unesite svoje prezime">
+                    </div>
+                  </div>
+
+                  <div class="form-input">
+                    <div class="licni-podatci">
+                      <label>Spol</label>
+                      <select name="spol">
+                        <option value="Muškarac">Muškarac</option>
+                        <option value="Žena">Žena</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-input">
+                    <label>Username</label>
+                    <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
+                         class="error-style" id="error-username"></div>
+                    <input type="text" name="username" id="register-username"
+                           maxlength="20" placeholder="Unesite korisničko ime">
+                  </div>
+                  <div class="form-input">
+                    <label>Email</label>
+                    <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
+                         class="error-style" id="error-email"></div>
+                    <input type="text" name="email" id="register-email" placeholder="Unesite email">
+                  </div>
+                  <div class="form-input">
+                    <label>Password</label>
+                    <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
+                         class="error-style" id="error-password"></div>
+                    <input type="password" name="password" id="register-password"
+                           placeholder="Unesite password">
+                  </div>
+                  <div class="form-input">
+                    <label>Potvrdi password</label>
+                    <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;display:none;min-width: 300px;"
+                         class="error-style" id="error-confPass"></div>
+                    <input type="password" name="confPass" id="confirm-password"
+                           placeholder="Ponovo unesite password">
+                  </div>
+                  <div class="form-submit">
+                    <button type="submit">Registriraj se</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!--Ako je prijavljen korisnik prikaži Avatar-->
+      <div th:if="${session.user != null}" class="user-avatar">
+        <div class="avatar-container">
+          <img src="/images/Logo.png" alt="Avatar" class="avatar" id="avatarBtn" />
+          <div class="dropdown" id="dropdownMenu" style="display: none">
+            <div class="dropdown-info">
+              <img src="/images/Logo.png" alt="Avatar"/>
+              <p th:text="${session.user.getImePrezime()}"></p>
+            </div>
+            <hr style="width: 100%;background-color: goldenrod;height: 3px;border: none;">
+            <a href="/general/edit_profile">Profile</a>
+            <a href="/general/settings">Settings</a>
+            <form th:action="@{/logout}" method="POST">
+              <button class="login" type="submit">Log out</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Role Defined Buttons -->
+  <div class="list-wrapper" th:fragment="role-buttons">
+    <ul th:if="${session.user.role.toString() == 'ADMIN'}">
+      <li>
+        <a>Edit profile</a>
+      </li>
+      <li>
+        <a>Settings</a>
+      </li>
+      <li>
+        <a>Svi Termini</a>
+      </li>
+      <li>
+        <a>Svi prihvaćeni Termini</a>
+      </li>
+      <li>
+        <a>Svi Frizeri</a>
+      </li>
+    </ul>
+    <ul th:if="${session.user.role.toString() == 'CLIENT'}">
+      <li>
+        <a href="/general/edit_profile">Edit profile</a>
+      </li>
+      <li>
+        <a href="/general/settings">Settings</a>
+      </li>
+      <li>
+        <a href="/client/zakazi_termin">Zakaži termin</a>
+      </li>
+      <li>
+        <a href="/client/prihvaceni_termini">Prihvaćeni termini</a>
+      </li>
+    </ul>
+    <ul th:if="${session.user.role.toString() == 'FRIZER'}">
+      <li>
+        <a>Edit profile</a>
+      </li>
+      <li>
+        <a>Settings</a>
+      </li>
+      <li>
+        <a>Zakaži termin</a>
+      </li>
+      <li>
+        <a>Odobreni termini</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Table Head -->
+  <p class="title" th:fragment="table_head" th:text="${title}"></p>
+
+  <!-- Edit Profile Form -->
+  <form th:fragment="edit_profile_form">
+    <div class="form">
+      <div class="form-input">
+        <label>Username</label>
+        <input type="text" name="username">
+      </div>
+      <div class="form-input">
+        <label>First Name</label>
+        <input type="text" name="first_name">
+      </div>
+      <div class="form-input">
+        <label>Last Name</label>
+        <input type="text" name="last_name">
+      </div>
+      <div class="form-input">
+        <div class="licni-podatci">
+          <label>Spol</label>
+          <select name="spol">
+            <option value="Muškarac">Muškarac</option>
+            <option value="Žena">Žena</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-submit" style="text-align: left;">
+      <button style="width: 30%;height: 70%;">Sačuvaj</button>
+    </div>
+  </form>
+
+  <!-- Settings Form -->
+  <form th:fragment="settings_form">
+    <div class="form">
+      <div class="form-input">
+        <label>Current Password</label>
+        <input type="password" name="password">
+      </div>
+      <div class="form-input">
+        <label>New Password</label>
+        <input type="password" name="newPassword">
+      </div>
+
+      <div class="form-input">
+        <label>Confrim Password</label>
+        <input type="password" name="confPassword">
+      </div>
+    </div>
+    <div class="form-submit" style="text-align: left;">
+      <button style="width: 30%;height: 70%;">Sačuvaj</button>
+    </div>
+  </form>
+
+  <!-- Zakaži Termin Form -->
+
+
+</body>
+</html>

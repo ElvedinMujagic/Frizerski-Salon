@@ -1,0 +1,102 @@
+body {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    background-color: #0c0f15;
+    overflow-x:hidden;
+    color: #ababab;
+}
+
+.border-wrapper {
+    background-color: goldenrod;
+    border-radius: 3px;
+    padding: 3px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 60%;
+    margin-top: 4vw;
+}
+
+.main-wrapper {
+    background-color: #0c0f15;
+    padding: 3px;
+}
+
+.title {
+    text-align: center;
+    font-size: 20px;
+    padding: 5px;
+    border: 1px solid #2e2d2d;
+    margin-bottom: 2px;
+    background: black;
+}
+
+.content-wrapper {
+    font-family: "Lato", sans-serif;
+    display: flex;
+    min-height: 500px;
+    background-color: transparent;
+    justify-content: space-between;
+    gap:2px
+}
+
+.list-wrapper {
+    width: 30%;
+    background-color: black;
+    border: 1px solid #2e2d2d;
+}
+
+.list-wrapper li {
+    list-style: none;
+}
+
+.list-wrapper a {
+    text-decoration: none;
+    box-shadow: 0 0 5px silver;
+    border-radius: 10px;
+    text-align: center;
+    color: silver;
+    font-weight: bold;
+    font-size: 15px;
+    margin: 10px;
+    padding: 15px;
+    background: linear-gradient(323deg, var(--myColor1), var(--myColor2), var(--myColor1));
+    transition: --myColor1 0.25s, --myColor2 0.25s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@property --myColor1 {
+    syntax: '<color>';
+    initial-value: #000;
+    inherits: false;
+}
+
+@property --myColor2 {
+    syntax: '<color>';
+    initial-value: #000;
+    inherits: false;
+}
+
+.list-wrapper a:hover {
+    color: black;
+    font-weight: bold;
+    background: linear-gradient(323deg,var(--myColor1), var(--myColor2),var(--myColor1));
+    --myColor1: #d69a02;
+    --myColor2: #edca8a;
+}
+
+
+
+.list-wrapper a:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.forms {
+    background-color: black;
+    border: 1px solid #2e2d2d;
+    width: 70%;
+}
