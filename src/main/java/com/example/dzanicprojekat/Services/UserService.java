@@ -31,9 +31,6 @@ public class UserService {
         User newUser = convertToUser(registerDTO);
         return userRepo.save(newUser);
     }
-    public User getRoleByUsername(String username){
-        return userRepo.readByUsername(username);
-    }
 
     public boolean checkByUsername(String username) {
         return userRepo.existsByUsername(username);

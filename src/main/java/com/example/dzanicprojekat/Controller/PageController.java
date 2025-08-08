@@ -9,7 +9,7 @@ public class PageController {
 
     @GetMapping("/info/home")
     public String home() {
-        return "index.html";
+        return "index";
     }
 
     @GetMapping("/info/onama")
@@ -46,6 +46,6 @@ public class PageController {
 
     @GetMapping("/")
     public String clientLogin() {
-        return "index.html";
+        return "index";
     }
 }

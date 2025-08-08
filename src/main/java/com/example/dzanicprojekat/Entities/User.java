@@ -1,11 +1,9 @@
 package com.example.dzanicprojekat.Entities;
 
-    import jakarta.persistence.*;
+import jakarta.persistence.*;
 import com.example.dzanicprojekat.Utility.Role;
 import java.time.LocalDateTime;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Getter @Setter
@@ -48,6 +46,4 @@ public class User {
         this.createdAt = LocalDateTime.now();
         role=Role.CLIENT;
     }
-
-    public User(User user) {}
 }
