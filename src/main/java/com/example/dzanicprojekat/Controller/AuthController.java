@@ -91,7 +91,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(response);
         }
         // Optimizirati koristeci try catch blockove
-        System.out.println("CHECKING USER ROLE");
+        System.out.println("CHECKING USER Role");
         User user = userService.getByUsername(request.getUsername());
         switch (user.getRole()) {
             case ADMIN:
