@@ -1,10 +1,9 @@
 package com.example.dzanicprojekat.Services;
 
-import com.example.dzanicprojekat.Entities.Client;
 import com.example.dzanicprojekat.Entities.User;
 import com.example.dzanicprojekat.Repositories.UserRepo;
 import com.example.dzanicprojekat.Utility.DTOs.LoginDTO;
-import com.example.dzanicprojekat.Utility.Role;
+import com.example.dzanicprojekat.Utility.DTOs.RegisterDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -28,6 +27,10 @@ public class UserService {
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
 
+    public User registerUser(RegisterDTO registerDTO) {
+        User newUser = convertToUser(registerDTO);
+        return userRepo.save(newUser);
+    }
     public User getRoleByUsername(String username){
         return userRepo.readByUsername(username);
     }
@@ -72,4 +75,16 @@ public class UserService {
         return false;
     }
 
+
+    private User convertToUser(RegisterDTO request) {
+        User user = new User();
+        user.setIme(request.getIme());
+        user.setPrezime(request.getPrezime());
+        user.setEmail(request.getEmail());
+        user.setHash(passwordEncoder.encode(request.getPassword()));
+        user.setUsername(request.getUsername());
+        user.setSpol(request.getSpol());
+        user.setBrojTelefona("");
+        return user;
+    }
 }

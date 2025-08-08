@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/new-style.css">
     <link rel="stylesheet" href="/css/tables.css">
+    <link rel="stylesheet" href="/css/appointmentStyle.css">
     <script th:if="${session.user != null }" th:src="@{/js/dropdowns.js}"></script>
     <script th:if="${session.user == null }" th:src="@{/js/scripts.js}"></script>
   </head>
@@ -286,7 +287,46 @@
   </form>
 
   <!-- Zakaži Termin Form -->
+  <form th:fragment="appointment_form"  method="post" class="appointment-form">
+    <h2>Book Your Appointment</h2>
 
+    <!-- Client Name -->
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName"  placeholder="Your full name" required>
+
+    <!-- Phone -->
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone"  placeholder="+387..." required>
+
+    <!-- Email -->
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="you@example.com">
+
+    <!-- Service Selection -->
+    <label for="service">Service</label>
+    <select id="service"  required>
+      <option value="">-- Select a service --</option>
+      <option value="HAIRCUT">Haircut</option>
+      <option value="COLOR">Hair Coloring</option>
+      <option value="STYLE">Hair Styling</option>
+      <option value="TREATMENT">Hair Treatment</option>
+    </select>
+
+    <!-- Date -->
+    <label for="date">Date</label>
+    <input type="date" id="date" required>
+
+    <!-- Time -->
+    <label for="time">Time</label>
+    <input type="time" id="time"  required>
+
+    <!-- Notes -->
+    <label for="notes">Additional Notes</label>
+    <textarea id="notes"  placeholder="Any special requests?"></textarea>
+
+    <!-- Submit -->
+    <button type="submit">Book Appointment</button>
+  </form>
 
 </body>
 </html>

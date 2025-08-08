@@ -10,7 +10,7 @@ body {
 
 .border-wrapper {
     background-color: goldenrod;
-    border-radius: 3px;
+    border-radius: 15px;
     padding: 3px;
     margin-right: auto;
     margin-left: auto;
@@ -19,6 +19,7 @@ body {
 }
 
 .main-wrapper {
+    border-radius: 15px;
     background-color: #0c0f15;
     padding: 3px;
 }
@@ -28,11 +29,13 @@ body {
     font-size: 20px;
     padding: 5px;
     border: 1px solid #2e2d2d;
+    border-radius: 15px;
     margin-bottom: 2px;
     background: black;
 }
 
 .content-wrapper {
+    border: 15px;
     font-family: "Lato", sans-serif;
     display: flex;
     min-height: 500px;
@@ -42,6 +45,7 @@ body {
 }
 
 .list-wrapper {
+    border-radius: 15px;
     width: 30%;
     background-color: black;
     border: 1px solid #2e2d2d;
@@ -97,6 +101,7 @@ body {
 
 .forms {
     background-color: black;
+    border-radius: 15px;
     border: 1px solid #2e2d2d;
     width: 70%;
 }

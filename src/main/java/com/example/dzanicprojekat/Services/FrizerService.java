@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 public class FrizerService {
     private final FrizerRepo frizerRepo;
 
-    public Frizer getByUsername(String username) {
-        return frizerRepo.readByUsername(username);
+    public Frizer getById(long id) {
+        return frizerRepo.readById(id);
     }
     public FrizerService(FrizerRepo frizerRepo) {
         this.frizerRepo = frizerRepo;

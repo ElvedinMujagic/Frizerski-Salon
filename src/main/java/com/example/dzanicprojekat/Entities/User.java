@@ -1,12 +1,13 @@
 package com.example.dzanicprojekat.Entities;
 
-import jakarta.persistence.*;
+    import jakarta.persistence.*;
 import com.example.dzanicprojekat.Utility.Role;
 import java.time.LocalDateTime;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +16,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Admin admin;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Frizer frizer;
 
     private String ime;
     private String prezime;

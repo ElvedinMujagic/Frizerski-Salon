@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ClientController {
+public class ClientPagesController {
 
     @GetMapping("/client/prihvaceni_termini")
     public String prihvaceniTermini(Model model) {

@@ -1,7 +1,6 @@
 package com.example.dzanicprojekat.Utility.DTOs;
 
 import com.example.dzanicprojekat.Entities.Admin;
-import com.example.dzanicprojekat.Entities.Client;
 import com.example.dzanicprojekat.Entities.Frizer;
 import com.example.dzanicprojekat.Entities.User;
 import com.example.dzanicprojekat.Utility.Role;
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SessionDTO<T extends User> {
+public class SessionDTO {
 
     // User Attributes
     private String ime;
@@ -39,7 +38,7 @@ public class SessionDTO<T extends User> {
     private boolean superAdmin;
 
 
-    public SessionDTO(T user) {
+    public SessionDTO(User user) {
         this.ime = user.getIme();
         this.prezime = user.getPrezime();
         this.username = user.getUsername();
@@ -50,24 +49,33 @@ public class SessionDTO<T extends User> {
         this.spol = user.getSpol();
     }
 
-    public void fillClient(Client client) {
-        this.loyaltyPoints = client.getLoyaltyPoints();
-        this.notes = client.getNotes();
+    public SessionDTO(User user,Admin admin) {
+        this.ime = user.getIme();
+        this.prezime = user.getPrezime();
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.brojTelefona = user.getBrojTelefona();
+        this.role = user.getRole();
+        this.createdAt = user.getCreatedAt();
+        this.spol = user.getSpol();
+        this.superAdmin = admin.isSuperAdmin();
     }
 
-    public void fillFrizer(Frizer frizer) {
-        this.godineIskustva = frizer.getGodineIskustva();
+    public SessionDTO(User user,Frizer frizer) {
+        this.ime = user.getIme();
+        this.prezime = user.getPrezime();
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.brojTelefona = user.getBrojTelefona();
+        this.role = user.getRole();
+        this.createdAt = user.getCreatedAt();
+        this.spol = user.getSpol();
         this.specijalizacija = frizer.getSpecijalizacija();
+        this.godineIskustva = frizer.getGodineIskustva();
         this.available = frizer.isAvailable();
-    }
-
-    public void fillAdmin(Admin admin) {
-        this.superAdmin=admin.isSuperAdmin();
     }
 
     public String getImePrezime() {
         return this.ime + " " + this.prezime;
     }
-
-
 }

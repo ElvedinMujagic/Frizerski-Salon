@@ -39,7 +39,13 @@ public class Termin {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "frizer_id")
     private Frizer frizer;
-    // Errori ne rade nista,ne znam zasto...
+
+    // Ovo će stvoriti još jednu tabelu pod naziv "termin_usluga"
+    // U njoj se nalaze ID termina i ID usluge
+    // Na taj način spremamo više usluga u jedan termin aka;
+    // termin_id:1 <----> usluga_id:1
+    // termin_id:1 <----> usluga_id:2
+    // termin_id:2 <----> usluga_id:3
     @ManyToMany
     @JoinTable(
             name = "termin_usluga",

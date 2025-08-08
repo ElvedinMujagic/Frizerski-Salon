@@ -1,24 +1,20 @@
 package com.example.dzanicprojekat.Controller;
 
 import com.example.dzanicprojekat.Entities.Admin;
-import com.example.dzanicprojekat.Entities.Client;
 import com.example.dzanicprojekat.Entities.Frizer;
 import com.example.dzanicprojekat.Entities.User;
 import com.example.dzanicprojekat.Services.AdminService;
-import com.example.dzanicprojekat.Services.ClientService;
 import com.example.dzanicprojekat.Services.FrizerService;
 import com.example.dzanicprojekat.Services.UserService;
 import com.example.dzanicprojekat.Utility.DTOs.LoginDTO;
 import com.example.dzanicprojekat.Utility.DTOs.RegisterDTO;
 import com.example.dzanicprojekat.Utility.DTOs.SessionDTO;
-import com.example.dzanicprojekat.Utility.Role;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -31,15 +27,13 @@ import java.util.Map;
 public class AuthController {
 
     private final UserService userService;
-    private final ClientService clientService;
     private final AdminService adminService;
     private final FrizerService frizerService;
 
-    public AuthController(UserService userService, ClientService clientService,
+    public AuthController(UserService userService,
                           AdminService adminService,
                           FrizerService frizerService) {
         this.userService = userService;
-        this.clientService = clientService;
         this.adminService = adminService;
         this.frizerService = frizerService;
     }
@@ -49,11 +43,11 @@ public class AuthController {
     public ResponseEntity<?> processRegistration(@Valid @ModelAttribute RegisterDTO request, BindingResult bindingResult) {
         System.out.println("ENDPOINT HIT - STARTING REGISTRATION");
 
-        if (clientService.checkByEmail(request.getEmail())) {
+        if (userService.checkByEmail(request.getEmail())) {
             bindingResult.rejectValue("email","email.taken","Email zauzet");
         }
 
-        if(clientService.checkByUsername(request.getUsername())) {
+        if(userService.checkByUsername(request.getUsername())) {
             bindingResult.rejectValue("username","username.taken","Korisnicko ime zauzeto");
         }
 
@@ -72,10 +66,10 @@ public class AuthController {
 
         Map<String,String> response = new HashMap<>();
         try {
-            Client savedClient = clientService.registerClient(request);
-            System.out.println("Saved Client ID: " + savedClient.getId() +
-                               "\nSaved Client Username: " + savedClient.getUsername());
-            response.put("redirect","/success");
+            User savedUser = userService.registerUser(request);
+            System.out.println("Saved User ID: " + savedUser.getId() +
+                               "\nSaved User Username: " + savedUser.getUsername());
+            response.put("redirect","/");
             return ResponseEntity.ok(response);
         }  catch (Exception e) {
             response.put("error","Registration Failed: " + e.getMessage());
@@ -96,37 +90,35 @@ public class AuthController {
             response.put("error","Invalid login credentials");
             return ResponseEntity.badRequest().body(response);
         }
-        // Napraviti try catch block koji omogucava da se ovo odradi bez zvanja DB 3 puta
-        // -> Napraviti validLogin da vrati User ili Optional<User>
-        SessionDTO<?> sessionDTO;
+        // Optimizirati koristeci try catch blockove
         System.out.println("CHECKING ROLE OF USER");
         User user = userService.getByUsername(request.getUsername());
         switch (user.getRole()) {
             case ADMIN:
                 System.out.println("USER-ROLE: ADMIN");
-                Admin admin = adminService.getByUsername(request.getUsername());
-                sessionDTO = new SessionDTO<>(admin);
-                sessionDTO.fillAdmin(admin);
+                Admin admin = adminService.getById(user.getId());
+                SessionDTO sessionAdmin = new SessionDTO(user,admin);
+                session.setAttribute("user",sessionAdmin);
+                System.out.println(sessionAdmin.getRole());
                 break;
             case CLIENT:
                 System.out.println("USER-ROLE: CLIENT");
-                Client client = clientService.getByUsername(request.getUsername());
-                sessionDTO = new SessionDTO<>(client);
-                sessionDTO.fillClient(client);
+                SessionDTO sessionClient = new SessionDTO(user);
+                session.setAttribute("user",sessionClient);
+                System.out.println(sessionClient.getRole());
                 break;
             case FRIZER:
                 System.out.println("USER-ROLE: FRIZER");
-                Frizer frizer = frizerService.getByUsername(request.getUsername());
-                sessionDTO = new SessionDTO<>(frizer);
-                sessionDTO.fillFrizer(frizer);
+                Frizer frizer = frizerService.getById(user.getId());
+                SessionDTO sessionFrizer = new SessionDTO(user,frizer);
+                session.setAttribute("user",sessionFrizer);
+                System.out.println(sessionFrizer.getRole());
                 break;
             default:
                 response.put("error","Error during role validation");
                 return ResponseEntity.badRequest().body(response);
         }
         response.put("redirect","/");
-        session.setAttribute("user",sessionDTO);
-        System.out.println(sessionDTO.getRole());
         return ResponseEntity.ok(response);
     }
 
