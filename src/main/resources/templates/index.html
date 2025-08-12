@@ -8,22 +8,6 @@
 
     <div th:replace="~{fragments::navbar}"></div>
     <main>
-        <div th:if="${session.user != null}" class="border-wrapper" >
-            <div class="main-wrapper">
-                <p class="title">Title</p>
-                <div class="content-wrapper">
-                    <div th:replace=" ~{fragments :: role-buttons}"></div>
-                    <div style="padding:5vw;" class="forms">
-                        <form th:replace="~{fragments :: edit_profile_form}">
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
-
-
-
 </body>
 </html>
