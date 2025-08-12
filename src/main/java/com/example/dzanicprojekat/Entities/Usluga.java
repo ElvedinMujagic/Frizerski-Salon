@@ -21,7 +21,6 @@ public class Usluga {
     private Long id;
 
     private String naziv;
-    private String kategorija;
     private double cijena;
     private int trajanje;
     private boolean active;
