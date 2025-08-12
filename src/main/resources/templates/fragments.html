@@ -6,8 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/new-style.css">
-    <link rel="stylesheet" href="/css/tables.css">
+    <link rel="stylesheet" href="/css/dashboards.css">
     <link rel="stylesheet" href="/css/appointmentStyle.css">
+    <link rel="stylesheet" href="/css/table.css">
     <script th:if="${session.user != null }" th:src="@{/js/dropdowns.js}"></script>
     <script th:if="${session.user == null }" th:src="@{/js/scripts.js}"></script>
   </head>
@@ -181,15 +182,17 @@
     </div>
   </nav>
 
+  <!-- Dashboard Head -->
+  <p class="title" th:fragment="dashboard_head" th:text="${title}"></p>
 
   <!-- Role Defined Buttons -->
   <div class="list-wrapper" th:fragment="role-buttons">
     <ul th:if="${session.user.role.toString() == 'ADMIN'}">
       <li>
-        <a>Edit profile</a>
+        <a href="/general/edit_profile">Edit profile</a>
       </li>
       <li>
-        <a>Settings</a>
+        <a href="/general/settings">Settings</a>
       </li>
       <li>
         <a>Svi Termini</a>
@@ -198,7 +201,16 @@
         <a>Svi prihvaćeni Termini</a>
       </li>
       <li>
-        <a>Svi Frizeri</a>
+        <a>Frizeri</a>
+      </li>
+      <li>
+        <a href="/admin/dodaj_frizera">Dodaj frizera</a>
+      </li>
+      <li>
+        <a href="/admin/sve_usluge">Usluge</a>
+      </li>
+      <li>
+        <a href="/admin/dodaj_usluge">Dodaj usluge</a>
       </li>
     </ul>
     <ul th:if="${session.user.role.toString() == 'CLIENT'}">
@@ -231,60 +243,119 @@
     </ul>
   </div>
 
-  <!-- Table Head -->
-  <p class="title" th:fragment="table_head" th:text="${title}"></p>
+  <!--  Sve Usluge Table   -->
+  <div  style="width: 90%;" class="forms_width" th:fragment="sve_usluge">
+    <div class="container">
+      <table class="table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Naziv</th>
+          <th scope="col">Cijena(KM)</th>
+          <th scope="col">Trajanje</th>
+          <th scope="col">Aktivno</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usluga : ${usluge}">
+          <th th:text="${usluga.id}"></th>
+          <td th:text="${usluga.naziv}"></td>
+          <td th:text="${usluga.cijena}"></td>
+          <td th:text="${usluga.trajanje}"></td>
+          <td th:text="${usluga.active}"></td>
+          <td><button type="button" class="login"><i>Delete</i></button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <!-- Edit Profile Form -->
-  <form th:fragment="edit_profile_form">
-    <div class="form">
-      <div class="form-input">
-        <label>Username</label>
-        <input type="text" name="username">
-      </div>
-      <div class="form-input">
-        <label>First Name</label>
-        <input type="text" name="first_name">
-      </div>
-      <div class="form-input">
-        <label>Last Name</label>
-        <input type="text" name="last_name">
-      </div>
-      <div class="form-input">
-        <div class="licni-podatci">
-          <label>Spol</label>
-          <select name="spol">
-            <option value="Muškarac">Muškarac</option>
-            <option value="Žena">Žena</option>
-          </select>
+  <div class="forms_width" th:fragment="edit_profile_form">
+    <form>
+        <div class="form-input">
+          <label>Username</label>
+          <input type="text" name="username">
         </div>
+        <div class="form-input">
+          <label>First Name</label>
+          <input type="text" name="first_name">
+        </div>
+        <div class="form-input">
+          <label>Last Name</label>
+          <input type="text" name="last_name">
+        </div>
+        <div class="form-input">
+          <div class="licni-podatci">
+            <label>Spol</label>
+            <select name="spol">
+              <option value="Muškarac">Muškarac</option>
+              <option value="Žena">Žena</option>
+            </select>
+          </div>
+        </div>
+      <div class="form-submit" style="text-align: left;">
+        <button style="width: 30%;height: 70%;">Sačuvaj</button>
       </div>
-    </div>
-    <div class="form-submit" style="text-align: left;">
-      <button style="width: 30%;height: 70%;">Sačuvaj</button>
-    </div>
-  </form>
-
+    </form>
+  </div>
   <!-- Settings Form -->
-  <form th:fragment="settings_form">
-    <div class="form">
+  <div class="forms_width" th:fragment="settings_form">
+    <form>
+        <div class="form-input">
+          <label>Current Password</label>
+          <input type="password" name="password">
+        </div>
+        <div class="form-input">
+          <label>New Password</label>
+          <input type="password" name="newPassword">
+        </div>
+
+        <div class="form-input">
+          <label>Confrim Password</label>
+          <input type="password" name="confPassword">
+        </div>
+      <div class="form-submit" style="text-align: left;">
+        <button style="width: 30%;height: 70%;">Sačuvaj</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Dodaj uslugu Form -->
+  <div class="forms_width" th:fragment="dodaj_uslugu_form">
+    <form th:object="${uslugaDTO}" action="/dodaj_uslugu" method="POST">
       <div class="form-input">
-        <label>Current Password</label>
-        <input type="password" name="password">
+        <label>Naziv usluge</label>
+        <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
+             class="error-style" th:if="${#fields.hasErrors('naziv')}" th:errors="*{UslugaDTO.naziv}"></div>
+        <input type="text" th:field="*{UslugaDTO.naziv}">
       </div>
       <div class="form-input">
-        <label>New Password</label>
-        <input type="password" name="newPassword">
+        <label>Cijena usluge</label>
+        <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
+             class="error-style" th:if="${#fields.hasErrors('naziv')}" th:errors="*{UslugaDTO.cijena}"></div>
+        <input type="number" th:field="*{UslugaDTO.cijena}" placeholder="(KM)">
       </div>
 
       <div class="form-input">
-        <label>Confrim Password</label>
-        <input type="password" name="confPassword">
+        <label>Trajanje usluge(minute)</label>
+        <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
+             class="error-style" th:if="${#fields.hasErrors('naziv')}" th:errors="*{UslugaDTO.trajanje}"></div>
+        <input type="number" th:field="*{UslugaDTO.trajanje}">
       </div>
-    </div>
+
+      <div class="form-checkbox">
+        <input type="checkbox" name="active">
+        <label>Active</label>
+      </div>
     <div class="form-submit" style="text-align: left;">
-      <button style="width: 30%;height: 70%;">Sačuvaj</button>
+      <button style="width: 30%;height: 70%;">Dodaj uslugu</button>
     </div>
-  </form>
+    </form>
+  </div>
 
   <!-- Zakaži Termin Form -->
   <form th:fragment="appointment_form"  method="post" class="appointment-form">
