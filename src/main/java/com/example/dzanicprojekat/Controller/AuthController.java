@@ -9,6 +9,7 @@ import com.example.dzanicprojekat.Services.UserService;
 import com.example.dzanicprojekat.Utility.DTOs.LoginDTO;
 import com.example.dzanicprojekat.Utility.DTOs.RegisterDTO;
 import com.example.dzanicprojekat.Utility.DTOs.SessionDTO;
+import com.example.dzanicprojekat.Utility.DTOs.UslugaDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -38,9 +39,13 @@ public class AuthController {
         this.frizerService = frizerService;
     }
 
+
+
+
     @ResponseBody
     @PostMapping("/register")
-    public ResponseEntity<?> processRegistration(@Valid @ModelAttribute RegisterDTO request, BindingResult bindingResult) {
+    public ResponseEntity<?> processRegistration(@Valid @ModelAttribute RegisterDTO request,
+                                                 BindingResult bindingResult) {
         System.out.println("ENDPOINT HIT - STARTING REGISTRATION");
 
         if (userService.checkByEmail(request.getEmail())) {
