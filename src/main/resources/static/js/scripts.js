@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
             body:formData,
         })
         if(response.ok) {
-            alert("Uspjesan login")
             const data = await response.json();
             if (data.redirect) {
                 window.location.href = data.redirect
