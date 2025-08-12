@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dodaj Usluge</title>
+
+  <head th:replace="~{fragments::resources}"></head>
+</head>
+<body>
+<div th:replace="~{fragments::navbar}"></div>
+<main>
+  <div th:if="${session.user != null}" class="border-wrapper" >
+    <div class="main-wrapper">
+      <p th:replace="~{fragments :: dashboard_head}"></p>
+      <div class="content-wrapper">
+        <div th:replace=" ~{fragments :: role-buttons}"></div>
+        <div style="padding:5vw;" class="forms">
+          <form th:replace="~{fragments :: sve_usluge}">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
