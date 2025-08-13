@@ -28,6 +28,14 @@ public class UslugeService {
         uslugeRepo.save(convertToUsluga(uslugaDTO));
     }
 
+    public void deleteUsluga(Long id) {
+        uslugeRepo.deleteById(id);
+    }
+
+    public boolean checkByID(Long id) {
+        return uslugeRepo.existsById(id);
+    }
+
     public boolean checkByNaziv(String naziv) {
         return uslugeRepo.existsByNaziv(naziv);
     }
