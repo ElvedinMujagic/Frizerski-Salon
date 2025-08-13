@@ -1,4 +1,4 @@
-.table-bordered button {
+.table-attribute button {
     font: 13px "Lato", sans-serif;
     font-weight: bold;
     text-decoration: none;
@@ -12,15 +12,52 @@
     rgb(255 122 122) 50%,
     rgb(180, 0, 0) 100%);
 }
-.table-bordered td,th,tbody,thead {
+.table-attribute td,th,tbody,thead {
     padding:8px;
 
 }
-.table-bordered {
+
+.table_positioning {
+   /* display: flex;
+    width: 100%;
+    justify-content: center;*/
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table_width {
+    width: 80%;
+}
+
+.razmak {
+    width: 100%;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+.container td,th {
+    padding: 10px;
+    border: 1px solid white;
+}
+
+.container {
+    border: 2px solid white;
+    max-height: 200px;
+    overflow: auto;
     width: 100%;
     text-align: center;
 }
 
 button:hover {
     box-shadow: 0 0 20px silver;
+}
+
+.horizontal_form {
+    gap: 7vw;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
 }
