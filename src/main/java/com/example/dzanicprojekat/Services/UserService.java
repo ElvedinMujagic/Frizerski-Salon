@@ -4,6 +4,7 @@ import com.example.dzanicprojekat.Entities.User;
 import com.example.dzanicprojekat.Repositories.UserRepo;
 import com.example.dzanicprojekat.Utility.DTOs.LoginDTO;
 import com.example.dzanicprojekat.Utility.DTOs.RegisterDTO;
+import com.example.dzanicprojekat.Utility.Role;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,11 @@ public class UserService {
     public User registerUser(RegisterDTO registerDTO) {
         User newUser = convertToUser(registerDTO);
         return userRepo.save(newUser);
+    }
+
+    public List<User> getUsersOnly() {
+        List<Role> excludedRoles = List.of(Role.ADMIN,Role.FRIZER);
+        return userRepo.findByRoleNotIn(excludedRoles);
     }
 
     public boolean checkByUsername(String username) {
