@@ -8,15 +8,47 @@
 <body>
     <div th:replace="~{fragments::navbar}"></div>
     <main>
-        <div th:if="${session.user != null}" class="border-wrapper" >
+        <div th:if="${session.user != null}" class="border-wrapper">
             <div class="main-wrapper">
+                <!-- TODO: Zamjeniti sve dijelove html-a koje koriste dashboard_head i napisati im title jednostavno -->
                 <p th:replace="~{fragments :: dashboard_head}"></p>
                 <div class="content-wrapper">
                     <div th:replace=" ~{fragments :: role-buttons}"></div>
                     <div style="padding:5vw;" class="forms">
-                        <form th:replace="~{fragments :: dodaj_uslugu_form}">
+                        <div class="table_width">
+                            <form th:object="${uslugaDTO}" action="/dodaj_uslugu" method="POST">
+                                <div class="form-input">
+                                    <label>Naziv usluge</label>
+                                    <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
+                                         class="error-style" th:if="${#fields.hasErrors('naziv')}" th:errors="*{naziv}"></div>
+                                    <input type="text" th:field="*{naziv}">
+                                </div>
+                                <div class="form-input">
+                                    <label>Cijena usluge</label>
+                                    <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
+                                         class="error-style" th:if="${#fields.hasErrors('naziv')}" th:errors="*{cijena}"></div>
+                                    <input type="number" th:field="*{cijena}" placeholder="(KM)">
+                                </div>
 
-                        </form>
+                                <div class="form-input">
+                                    <label>Trajanje usluge(minute)</label>
+                                    <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
+                                         class="error-style" th:if="${#fields.hasErrors('naziv')}" th:errors="*{trajanje}"></div>
+                                    <input type="number" th:field="*{trajanje}">
+                                </div>
+
+                                <div class="form-checkbox">
+                                    <input type="checkbox" th:field="*{active}">
+                                    <label>Active</label>
+                                </div>
+                                <div class="form-submit" style="text-align: left;">
+                                    <button style="width: 30%;height: 70%;">Dodaj uslugu</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

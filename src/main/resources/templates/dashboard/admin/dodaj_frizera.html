@@ -7,5 +7,81 @@
 </head>
 <body>
     <div th:replace="~{fragments::navbar}"></div>
+    <main>
+        <div th:if="${session.user != null}" class="border-wrapper" >
+            <div class="main-wrapper">
+                <p th:replace="~{fragments :: dashboard_head}"></p>
+                <div class="content-wrapper">
+                    <div th:replace=" ~{fragments :: role-buttons}"></div>
+                    <div style="padding:5vw;" class="forms">
+                        <div class="table_positioning">
+                            <div  style="width: 100%;" class="table_width">
+                                <p>Lista korisnika:</p>
+                                <div class="container">
+                                    <table style="width: 100%">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Ime i Prezime</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Spol</th>
+                                            <th scope="col">Broj Telefona</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="user : ${users}">
+                                            <th th:text="${user.getId()}"></th>
+                                            <td th:text="${user.getUsername()}"></td>
+                                            <td th:text="${user.getIme() + ' ' + user.getPrezime()}"></td>
+                                            <td th:text="${user.getEmail()}"></td>
+                                            <td th:text="${user.getSpol()}"></td>
+                                            <td th:text="${user.getBrojTelefona()}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="razmak">
+                        <form class="horizontal_form" th:object="${frizerDTO}" action="/dodaj_frizera" method="POST">
+                            <div class="first_row">
+                                <div class="form-input">
+                                    <label>Godine Iskustva</label>
+                                    <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
+                                         class="error-style" th:if="${#fields.hasErrors('godineIskustva')}" th:errors="*{godineIskustva}"></div>
+                                    <input type="number" th:field="*{godineIskustva}">
+                                </div>
+                                <div class="form-input">
+                                    <label>Specijalizacija</label>
+                                    <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
+                                         class="error-style" th:if="${#fields.hasErrors('specijalizacija')}" th:errors="*{specijalizacija}"></div>
+                                    <input type="text" th:field="*{specijalizacija}">
+                                </div>
+                            </div>
+                            <div class="second_row">
+                                <div class="form-input">
+                                    <label>ID Korisnika</label>
+                                    <div style="color:red;font-family: 'Lato', sans-serif;
+                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
+                                         class="error-style" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+                                    <input type="number" th:field="*{id}">
+                                </div>
+                                <div class="form-checkbox" style="margin-bottom:0">
+                                    <input type="checkbox" th:field="*{available}">
+                                    <label>Dostupan</label>
+                                </div>
+                                <div class="form-submit" style="text-align: left;">
+                                    <button style="width: 50%;height: 50%;">Dodaj frizera</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
