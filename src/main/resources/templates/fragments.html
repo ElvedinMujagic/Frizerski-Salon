@@ -204,7 +204,7 @@
         <a>Frizeri</a>
       </li>
       <li>
-        <a href="/admin/dodaj_frizera">Dodaj frizera</a>
+        <a href="/admin/dodaj_frizera_form">Dodaj frizera</a>
       </li>
       <li>
         <a href="/admin/sve_usluge">Usluge</a>
@@ -243,35 +243,8 @@
     </ul>
   </div>
 
-  <!--  Sve Usluge Table   -->
-  <div  style="width: 90%;" class="forms_width" th:fragment="sve_usluge">
-    <div class="container">
-      <table class="table-bordered">
-        <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Naziv</th>
-          <th scope="col">Cijena(KM)</th>
-          <th scope="col">Trajanje</th>
-          <th scope="col">Aktivno</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="usluga : ${usluge}">
-          <th th:text="${usluga.id}"></th>
-          <td th:text="${usluga.naziv}"></td>
-          <td th:text="${usluga.cijena}"></td>
-          <td th:text="${usluga.trajanje}"></td>
-          <td th:text="${usluga.active}"></td>
-          <td><button type="button" class="login"><i>Delete</i></button></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
   <!-- Edit Profile Form -->
-  <div class="forms_width" th:fragment="edit_profile_form">
+  <div class="table_width" th:fragment="edit_profile_form">
     <form>
         <div class="form-input">
           <label>Username</label>
@@ -300,7 +273,7 @@
     </form>
   </div>
   <!-- Settings Form -->
-  <div class="forms_width" th:fragment="settings_form">
+  <div class="table_width" th:fragment="settings_form">
     <form>
         <div class="form-input">
           <label>Current Password</label>
@@ -318,42 +291,6 @@
       <div class="form-submit" style="text-align: left;">
         <button style="width: 30%;height: 70%;">Sačuvaj</button>
       </div>
-    </form>
-  </div>
-
-  <!-- Dodaj uslugu Form -->
-  <div class="forms_width" th:fragment="dodaj_uslugu_form">
-    <form th:object="${uslugaDTO}" action="/dodaj_uslugu" method="POST">
-      <div class="form-input">
-        <label>Naziv usluge</label>
-        <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
-             class="error-style" th:if="${#fields.hasErrors('naziv')}" th:errors="*{UslugaDTO.naziv}"></div>
-        <input type="text" th:field="*{UslugaDTO.naziv}">
-      </div>
-      <div class="form-input">
-        <label>Cijena usluge</label>
-        <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
-             class="error-style" th:if="${#fields.hasErrors('naziv')}" th:errors="*{UslugaDTO.cijena}"></div>
-        <input type="number" th:field="*{UslugaDTO.cijena}" placeholder="(KM)">
-      </div>
-
-      <div class="form-input">
-        <label>Trajanje usluge(minute)</label>
-        <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
-             class="error-style" th:if="${#fields.hasErrors('naziv')}" th:errors="*{UslugaDTO.trajanje}"></div>
-        <input type="number" th:field="*{UslugaDTO.trajanje}">
-      </div>
-
-      <div class="form-checkbox">
-        <input type="checkbox" name="active">
-        <label>Active</label>
-      </div>
-    <div class="form-submit" style="text-align: left;">
-      <button style="width: 30%;height: 70%;">Dodaj uslugu</button>
-    </div>
     </form>
   </div>
 
