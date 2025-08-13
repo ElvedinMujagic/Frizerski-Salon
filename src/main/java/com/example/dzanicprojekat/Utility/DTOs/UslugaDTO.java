@@ -11,7 +11,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-
 public class UslugaDTO {
     @NotBlank(message = "Naziv je potreban!!")
     private String naziv;
@@ -19,7 +18,7 @@ public class UslugaDTO {
     @Min(value = 1, message = "Cijena mora biti najmanje 1 KM")
     private double cijena;
     @NotNull(message = "Trajanje je potrebno!")
-    @Min(value = 1, message = "Trajanje mora biti najmanje 1 minuta")
+    @Min(value = 1, message = "Trajanje mora biti najkraće 1 minuta")
     private int trajanje;
     private boolean active;
 
