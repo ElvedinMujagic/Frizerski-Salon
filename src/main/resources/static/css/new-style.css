@@ -345,6 +345,7 @@ input:-webkit-autofill:active {
     width: 100%;
     margin-bottom: 10px;
     color: silver;
+    align-items: center;
 }
 
 .form-checkbox label {
