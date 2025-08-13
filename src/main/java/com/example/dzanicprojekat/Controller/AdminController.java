@@ -19,9 +19,4 @@ public class AdminController {
         this.frizerService = frizerService;
     }
 
-    @GetMapping("/admin/dodaj_frizera")
-    public String dodajFrizera(Model model) {
-        model.addAttribute("title","Dodaj Frizera");
-        return "/dashboard/admin/dodaj_frizera";
-    }
 }
