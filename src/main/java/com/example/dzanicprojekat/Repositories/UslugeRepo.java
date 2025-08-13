@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UslugeRepo extends JpaRepository<Usluga,Long> {
     boolean existsByNaziv(String email);
+    boolean existsById(long id);
+    void deleteById(long id);
 }
