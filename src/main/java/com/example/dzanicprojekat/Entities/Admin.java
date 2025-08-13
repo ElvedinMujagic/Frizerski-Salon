@@ -21,6 +21,7 @@ public class Admin {
 
     @OneToOne
     @JoinColumn(name = "id")
+    @MapsId
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 

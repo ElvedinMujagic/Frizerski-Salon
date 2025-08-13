@@ -18,6 +18,7 @@ public class Frizer {
 
     @OneToOne
     @JoinColumn(name = "id")
+    @MapsId
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
