@@ -9,7 +9,6 @@ import com.example.dzanicprojekat.Services.UserService;
 import com.example.dzanicprojekat.Utility.DTOs.LoginDTO;
 import com.example.dzanicprojekat.Utility.DTOs.RegisterDTO;
 import com.example.dzanicprojekat.Utility.DTOs.SessionDTO;
-import com.example.dzanicprojekat.Utility.DTOs.UslugaDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;

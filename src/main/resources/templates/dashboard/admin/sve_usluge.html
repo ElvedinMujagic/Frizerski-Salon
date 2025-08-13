@@ -10,43 +10,44 @@
 <div th:replace="~{fragments::navbar}"></div>
 <main>
   <div th:if="${session.user != null}" class="border-wrapper" >
-    <div class="main-wrapper">
-      <p th:replace="~{fragments :: dashboard_head}"></p>
-      <div class="content-wrapper">
-        <div th:replace=" ~{fragments :: role-buttons}"></div>
-        <div style="padding:2vw;" class="forms">
-          <div class="table_positioning">
-            <div  style="width: 90%;" class="table_width">
-              <div class="container">
-                <table style="width: 100%">
-                  <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Naziv</th>
-                    <th scope="col">Cijena(KM)</th>
-                    <th scope="col">Trajanje(min)</th>
-                    <th scope="col">Aktivno</th>
-                    <th scope="col">-</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr th:each="usluga : ${usluge}">
-                    <th th:text="${usluga.getId()}"></th>
-                    <td th:text="${usluga.getNaziv()}"></td>
-                    <td th:text="${usluga.getCijena()}"></td>
-                    <td th:text="${usluga.getTrajanje()}"></td>
-                    <td th:text="${usluga.isActive()}"></td>
-                    <td>
-                      <form class="table-attribute" action="/obrisi_uslugu" method="post">
-                        <input type="hidden" name="id" th:value="${usluga.getId()}"/>
-                        <button class="login" type="submit"><i>Delete</i></button>
-                      </form>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
+      <div class="main-wrapper">
+        <p th:replace="~{fragments :: dashboard_head}"></p>
+        <div class="content-wrapper">
+          <div th:replace=" ~{fragments :: role-buttons}"></div>
+          <div style="padding:2vw;" class="forms">
+            <div class="table_positioning">
+              <div  style="width: 90%;" class="table_width">
+                <div class="container">
+                  <table style="width: 100%">
+                    <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Naziv</th>
+                      <th scope="col">Cijena(KM)</th>
+                      <th scope="col">Trajanje(min)</th>
+                      <th scope="col">Aktivno</th>
+                      <th scope="col">-</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="usluga : ${usluge}">
+                      <th th:text="${usluga.getId()}"></th>
+                      <td th:text="${usluga.getNaziv()}"></td>
+                      <td th:text="${usluga.getCijena()}"></td>
+                      <td th:text="${usluga.getTrajanje()}"></td>
+                      <td th:text="${usluga.isActive()}"></td>
+                      <td>
+                        <form class="table-attribute" action="/obrisi_uslugu" method="post">
+                          <input type="hidden" name="id" th:value="${usluga.getId()}"/>
+                          <button class="login" type="submit"><i>Delete</i></button>
+                        </form>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>

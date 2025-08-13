@@ -3,15 +3,10 @@ package com.example.dzanicprojekat.Controller;
 import com.example.dzanicprojekat.Services.UslugeService;
 import com.example.dzanicprojekat.Utility.DTOs.UslugaDTO;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class UslugeController {
