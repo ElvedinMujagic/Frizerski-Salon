@@ -11,6 +11,14 @@ body, html {
     background-color: #0c0f15;
 }
 
+.error-style {
+    color:red;
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 3px;
+    font-size: 15px;
+    min-width: 300px;
+}
+
 /* Navbar layout */
 .navbar {
     padding: 10px 50px 10px 50px;
@@ -270,6 +278,12 @@ input:-webkit-autofill:active {
     transition: all 0.2s ease-in-out;
 }
 
+.form-input input[type="date"] {
+    color-scheme: dark;
+    color: white;
+    background-color: black;
+}
+
 .form-input label {
     font-family: "Lato", sans-serif;
     background: transparent;
@@ -280,11 +294,7 @@ input:-webkit-autofill:active {
     margin-bottom: 10px;
 }
 
-.form-input .licni-podatci {
-    max-width: 220px;
-}
-
-.form-input .licni-podatci select {
+.form-input select {
     padding: 10px;
     width: 100%;
     background-color: black;
@@ -396,4 +406,48 @@ input:-webkit-autofill:active {
 .form hr {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.termin_left {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.termin_left .inputs {
+    width: 70%;
+}
+
+.termin_right {
+    color: white;
+    width: 50%;
+}
+
+.termin_right li {
+    list-style: circle;
+    margin-left: 20px;
+}
+
+.termin_right p {
+    font-size: 20px;
+    font-family: Arial,sans-serif;
+    font-style: italic;
+}
+
+.termin_right .racun {
+    margin: 2vw;
+}
+
+.termin_right .racun_header{
+    margin-bottom: 2vw;
+    font-style: italic;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-size: 30px;
+}
+
+.add_termin_button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between
 }
