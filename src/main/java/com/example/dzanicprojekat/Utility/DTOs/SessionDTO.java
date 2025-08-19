@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 public class SessionDTO {
 
     // User Attributes
+    private long id;
     private String ime;
     private String prezime;
     private String username;
@@ -39,37 +40,16 @@ public class SessionDTO {
 
 
     public SessionDTO(User user) {
-        this.ime = user.getIme();
-        this.prezime = user.getPrezime();
-        this.username = user.getUsername();
-        this.email = user.getEmail();
-        this.brojTelefona = user.getBrojTelefona();
-        this.role = user.getRole();
-        this.createdAt = user.getCreatedAt();
-        this.spol = user.getSpol();
+        fillData(user);
     }
 
     public SessionDTO(User user,Admin admin) {
-        this.ime = user.getIme();
-        this.prezime = user.getPrezime();
-        this.username = user.getUsername();
-        this.email = user.getEmail();
-        this.brojTelefona = user.getBrojTelefona();
-        this.role = user.getRole();
-        this.createdAt = user.getCreatedAt();
-        this.spol = user.getSpol();
+        fillData(user);
         this.superAdmin = admin.isSuperAdmin();
     }
 
     public SessionDTO(User user,Frizer frizer) {
-        this.ime = user.getIme();
-        this.prezime = user.getPrezime();
-        this.username = user.getUsername();
-        this.email = user.getEmail();
-        this.brojTelefona = user.getBrojTelefona();
-        this.role = user.getRole();
-        this.createdAt = user.getCreatedAt();
-        this.spol = user.getSpol();
+        fillData(user);
         this.specijalizacija = frizer.getSpecijalizacija();
         this.godineIskustva = frizer.getGodineIskustva();
         this.available = frizer.isAvailable();
@@ -77,5 +57,17 @@ public class SessionDTO {
 
     public String getImePrezime() {
         return this.ime + " " + this.prezime;
+    }
+
+    private void fillData(User user) {
+        this.ime = user.getIme();
+        this.prezime = user.getPrezime();
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.brojTelefona = user.getBrojTelefona();
+        this.role = user.getRole();
+        this.createdAt = user.getCreatedAt();
+        this.spol = user.getSpol();
+        this.id = user.getId();
     }
 }
