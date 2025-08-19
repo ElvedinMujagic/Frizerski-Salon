@@ -103,7 +103,7 @@ body {
 
 .forms {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
     background-color: black;
     border-radius: 15px;
     border: 1px solid #2e2d2d;
