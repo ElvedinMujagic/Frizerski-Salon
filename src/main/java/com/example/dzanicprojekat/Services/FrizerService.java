@@ -10,11 +10,17 @@ import com.example.dzanicprojekat.Utility.Role;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class FrizerService {
     private final FrizerRepo frizerRepo;
     private final UserRepo userRepo;
+
+    public List<Frizer> getAvailableFrizers() {
+        return frizerRepo.findAllByAvailable(true);
+    }
 
     public Frizer getById(Long id) {
         return frizerRepo.readById(id);
@@ -32,9 +38,19 @@ public class FrizerService {
         user.setRole(Role.FRIZER);
         frizerRepo.save(frizer);
     }
+
     public boolean checkById(Long id) {
         return frizerRepo.existsById(id);
     }
+
+    public void deleteFrizer(Long id){
+        Frizer frizer = frizerRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Frizer nije nadjen"));
+        User user = frizer.getUser();
+        user.setRole(Role.CLIENT);
+        user.setFrizer(null);
+    }
+
     public FrizerService(FrizerRepo frizerRepo, UserRepo userRepo) {
         this.frizerRepo = frizerRepo;
         this.userRepo = userRepo;
