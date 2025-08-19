@@ -25,5 +25,4 @@ public class Usluga {
     private int trajanje;
     private boolean active;
 
-
 }
