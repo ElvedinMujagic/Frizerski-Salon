@@ -18,10 +18,16 @@ public class UslugeService {
         this.uslugeRepo = uslugeRepo;
     }
 
+    public List<Usluga> getAllActiveUsluga() {
+        return uslugeRepo.findByActive(true);
+    }
     public List<Usluga> getAllUsluga() {
         return uslugeRepo.findAll();
     }
 
+    public Usluga getById(Long id) {
+        return uslugeRepo.readById(id);
+    }
 
     public void addUsluga(UslugaDTO uslugaDTO) {
         uslugeRepo.save(convertToUsluga(uslugaDTO));
@@ -31,7 +37,7 @@ public class UslugeService {
         uslugeRepo.deleteById(id);
     }
 
-    public boolean checkByID(Long id) {
+    public boolean checkById(Long id) {
         return uslugeRepo.existsById(id);
     }
 
