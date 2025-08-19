@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments::resources}">
-
+<head>
+  <th:block th:insert="~{fragments :: resources}"></th:block>
+  <script src="/js/client_zakazi_termin.js"></script>
   <title>Zakazi Termin</title>
 </head>
 <body>
@@ -14,16 +15,60 @@
       <p th:replace="~{fragments :: dashboard_head}"></p>
       <div class="content-wrapper">
         <div th:replace=" ~{fragments :: role-buttons}"></div>
-        <div style="padding:5vw;" class="forms">
-          <form>
-
+        <div style="padding:1vw;" class="forms">
+          <form th:object="${terminDTO}" action="/dodaj_termin_request" method="POST" id="add_termin" class="add_termin_button">
+            <div class="termin_left">
+              <div class="inputs">
+                <div class="form-input">
+                  <label>Odaberite datum termina:</label>
+                  <div class="error-style" th:if="${#fields.hasErrors('datum')}" th:errors="*{datum}"></div>
+                  <input id="date_picker"
+                         type="date"
+                         onclick="this.showPicker()"
+                         th:min="${minTime}"
+                         th:max="${maxTime}"
+                         th:field="*{datum}">
+                </div>
+                <div class="form-input">
+                  <div class="licni-podatci">
+                    <label>Odaberite usluge</label>
+                    <div class="error-style" th:if="${#fields.hasErrors('uslugeId')}" th:errors="*{uslugeId}"></div>
+                      <input type="hidden" th:value="${session.user.id}" name="userId">
+                    <select id="usluga_picker" th:field="*{uslugeId}">
+                      <option th:each="usluga:${usluge}"
+                              th:value="${usluga.id}"
+                              th:text="${usluga.naziv + ' - ' + usluga.cijena + ' KM'}"></option>
+                    </select>
+                    <!-- <button type="button" id="add_usluga" style="margin-top:10px;font-size:12px;" class="login">Dodaj</button> -->
+                  </div>
+                </div>
+                <div class="form-input">
+                  <div class="licni-podatci" >
+                    <label>Odaberite frizera:</label>
+                    <div class="error-style" th:if="${#fields.hasErrors('frizerId')}" th:errors="*{frizerId}"></div>
+                    <select id="frizer_picker" th:field="*{frizerId}">
+                      <option th:each="frizer : ${frizers}"
+                              th:value="${frizer.id}"
+                              th:text="${frizer.user.ime + ' ' + frizer.user.prezime}"></option>
+                    </select>
+                  </div>
+                </div>
+                <button style="" class="login">Zakaži termin</button>
+              </div>
+              <div class="vertical-line" style="border-left: 5px dashed silver;height: 100%"></div>
+            </div>
+            <!--<div class="termin_right">
+              <div class="racun">
+                <p class="racun_header">Račun</p>
+                <ol id="usluge">Odabrane usluge:</ol>
+                <p id="cijena" >Ukupna Cijena:</p>
+              </div>
+            </div> -->
           </form>
         </div>
       </div>
     </div>
   </div>
 </main>
-
-
 </body>
 </html>
