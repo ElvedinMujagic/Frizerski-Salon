@@ -1,7 +1,11 @@
 <!DOCTYPE html>
   <html xmlns:th="http://www.thymeleaf.org" lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <head th:fragment="resources">
+  <head>
+  </head>
+<body>
+<!-- Resources (.css/.jss...etc)-->
+  <div th:fragment="resources">
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +15,7 @@
     <link rel="stylesheet" href="/css/table.css">
     <script th:if="${session.user != null }" th:src="@{/js/dropdowns.js}"></script>
     <script th:if="${session.user == null }" th:src="@{/js/scripts.js}"></script>
-  </head>
-<body>
-
+  </div>
   <!-- Navigation bar Fragment-->
   <nav th:fragment="navbar" class="navbar">
     <div class="nav-left">
@@ -57,9 +59,7 @@
                     <label>Zapamti me</label>
                     <a href="#">Zaboravili ste šifru?</a>
                   </div>
-                  <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
-                       class="error-style" id="error-login">Test</div>
+                  <div class="error-style" id="error-login">Test</div>
                   <div class="form-submit">
                     <button>Prijavi se</button>
                   </div>
@@ -89,24 +89,17 @@
                     <h1>Registracija</h1>
                   </div>
                   <div class="form-input">
-                    <div class="licni-podatci">
+                    <div class="licni-podatci" style="max-width: 220px;">
                       <label>Ime</label>
-                      <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
-                           class="error-style" id="error-ime-register"></div>
-                      <input type="text" name="ime" id="ime"
-                             maxlength="15" placeholder="Unesite svoje ime">
+                      <div class="error-style" id="error-ime-register"></div>
+                      <input type="text" name="ime" id="ime" maxlength="15" placeholder="Unesite svoje ime">
                     </div>
                   </div>
                   <div class="form-input">
-                    <div class="licni-podatci">
+                    <div class="licni-podatci" style="max-width: 220px;">
                       <label>Prezime</label>
-                      <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
-                           class="error-style" id="error-prezime"></div>
-                      <input type="text" name="prezime" id="prezime"
-                             maxlength="15"
-                             placeholder="Unesite svoje prezime">
+                      <div class="error-style" id="error-prezime"></div>
+                      <input type="text" name="prezime" id="prezime" maxlength="15" placeholder="Unesite svoje prezime">
                     </div>
                   </div>
 
@@ -121,32 +114,24 @@
                   </div>
                   <div class="form-input">
                     <label>Username</label>
-                    <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
-                         class="error-style" id="error-username"></div>
+                    <div class="error-style" id="error-username"></div>
                     <input type="text" name="username" id="register-username"
                            maxlength="20" placeholder="Unesite korisničko ime">
                   </div>
                   <div class="form-input">
                     <label>Email</label>
-                    <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
-                         class="error-style" id="error-email"></div>
+                    <div class="error-style" id="error-email"></div>
                     <input type="text" name="email" id="register-email" placeholder="Unesite email">
                   </div>
                   <div class="form-input">
                     <label>Password</label>
-                    <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;display: none;min-width: 300px;"
-                         class="error-style" id="error-password"></div>
+                    <div class="error-style" id="error-password"></div>
                     <input type="password" name="password" id="register-password"
                            placeholder="Unesite password">
                   </div>
                   <div class="form-input">
                     <label>Potvrdi password</label>
-                    <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;display:none;min-width: 300px;"
-                         class="error-style" id="error-confPass"></div>
+                    <div class="error-style" id="error-confPass"></div>
                     <input type="password" name="confPass" id="confirm-password"
                            placeholder="Ponovo unesite password">
                   </div>
@@ -195,16 +180,13 @@
         <a href="/general/settings">Settings</a>
       </li>
       <li>
-        <a>Svi Termini</a>
+        <a href="/admin/svi_termini">Svi Termini</a>
       </li>
       <li>
-        <a>Svi prihvaćeni Termini</a>
+        <a href="/admin/svi_frizeri_page">Frizeri</a>
       </li>
       <li>
-        <a>Frizeri</a>
-      </li>
-      <li>
-        <a href="/admin/dodaj_frizera_form">Dodaj frizera</a>
+        <a href="/admin/dodaj_frizera_page">Dodaj frizera</a>
       </li>
       <li>
         <a href="/admin/sve_usluge">Usluge</a>
@@ -272,6 +254,7 @@
       </div>
     </form>
   </div>
+
   <!-- Settings Form -->
   <div class="table_width" th:fragment="settings_form">
     <form>
