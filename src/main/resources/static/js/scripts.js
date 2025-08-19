@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const registerBtn = document.getElementById("RegisterBtn");
     const LoginPopupOverlay = document.getElementById("LoginPopupOverlay");
     const RegisterPopupOverlay = document.getElementById("RegisterPopupOverlay")
-
     const errorOverlays = document.getElementsByClassName("error-style")
 
     loginBtn.addEventListener("click", function () {
@@ -67,13 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("error-login").textContent = errors.error
         }
     })
-
     registerForm.addEventListener("submit",  async function(event) {
         event.preventDefault();
         const formData = new FormData(registerForm);
-        const response = await fetch("/register", {
-            method:"POST",
-            body:formData});
+        const response = await fetch("/register", {method:"POST", body:formData});
         if (response.ok) {
             const data = await response.json();
             if (data.redirect) {
@@ -93,5 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("error-confPass").textContent = errors.confPass
         }
     });
+
+
 });
 
