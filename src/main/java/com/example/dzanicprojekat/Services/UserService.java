@@ -33,8 +33,13 @@ public class UserService {
         return userRepo.save(newUser);
     }
 
-    public List<User> getUsersOnly() {
+    public List<User> getClientsOnly() {
         List<Role> excludedRoles = List.of(Role.ADMIN,Role.FRIZER);
+        return userRepo.findByRoleNotIn(excludedRoles);
+    }
+
+    public List<User> getFrizersOnly() {
+        List<Role> excludedRoles = List.of(Role.ADMIN,Role.CLIENT);
         return userRepo.findByRoleNotIn(excludedRoles);
     }
 
@@ -44,6 +49,10 @@ public class UserService {
 
     public boolean checkByEmail(String email) {
         return userRepo.existsByEmail(email);
+    }
+
+    public User getById(Long id) {
+        return userRepo.readById(id);
     }
 
     public User getByUsername(String username) {
@@ -77,7 +86,6 @@ public class UserService {
         System.out.println("Failed to create Authentication Token - Check Login credentials");
         return false;
     }
-
 
     private User convertToUser(RegisterDTO request) {
         User user = new User();
