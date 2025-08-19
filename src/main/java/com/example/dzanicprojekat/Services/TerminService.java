@@ -1,0 +1,50 @@
+package com.example.dzanicprojekat.Services;
+
+import com.example.dzanicprojekat.Entities.Frizer;
+import com.example.dzanicprojekat.Entities.Termin;
+import com.example.dzanicprojekat.Entities.User;
+import com.example.dzanicprojekat.Entities.Usluga;
+import com.example.dzanicprojekat.Repositories.TerminRepo;
+import com.example.dzanicprojekat.Utility.DTOs.TerminDTO;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+@Transactional
+public class TerminService {
+
+    private final TerminRepo terminRepo;
+    private final UserService userService;
+    private final FrizerService frizerService;
+    private final UslugeService uslugeService;
+
+    public TerminService(TerminRepo terminRepo, UserService userService, FrizerService frizerService, UslugeService uslugeService) {
+        this.terminRepo = terminRepo;
+        this.userService = userService;
+        this.frizerService = frizerService;
+        this.uslugeService = uslugeService;
+    }
+
+    public List<Termin> getAllTermins() {
+        return terminRepo.findAll();
+    }
+
+    public void dodajTermin(TerminDTO terminDTO) {
+        User user = userService.getById(terminDTO.getUserId());
+        Frizer frizer = frizerService.getById(terminDTO.getFrizerId());
+        Usluga usluga = uslugeService.getById(terminDTO.getUslugeId());
+        List<Usluga> uslugaList = new ArrayList<>();
+        uslugaList.add(usluga);
+        Termin termin = new Termin();
+        termin.setFrizer(frizer);
+        termin.setUser(user);
+        termin.setUsluge(uslugaList);
+        termin.setCijena(usluga.getCijena());
+        termin.setDatum_termina(terminDTO.getDatum());
+        terminRepo.save(termin);
+    }
+
+}
