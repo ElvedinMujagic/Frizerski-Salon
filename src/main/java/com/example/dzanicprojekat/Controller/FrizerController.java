@@ -1,6 +1,5 @@
 package com.example.dzanicprojekat.Controller;
 
-import com.example.dzanicprojekat.Entities.User;
 import com.example.dzanicprojekat.Services.AdminService;
 import com.example.dzanicprojekat.Services.FrizerService;
 import com.example.dzanicprojekat.Services.UserService;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 public class FrizerController {

@@ -1,13 +1,9 @@
 package com.example.dzanicprojekat.Utility.DTOs;
 
-import com.example.dzanicprojekat.Entities.Frizer;
-import com.example.dzanicprojekat.Entities.User;
-import com.example.dzanicprojekat.Entities.Usluga;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter

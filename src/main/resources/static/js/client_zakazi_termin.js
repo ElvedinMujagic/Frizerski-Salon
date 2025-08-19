@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const dateInput = document.getElementById("date_picker");
+    /* const dateInput = document.getElementById("date_picker");
     const frizerInput = document.getElementById("frizer_picker");
     const uslugeInput = document.getElementById("usluga_picker");
     const addUslugaButton =document.getElementById("add_usluga")
     const uslugeList =document.getElementById("usluge")
     const cijenaEl = document.getElementById("cijena");
 
-    const addTerminForm = document.getElementById("add_termin");
+    const addTerminForm = document.getElementById("add_termin"); */
     /*
     var odabraneUsluge =[]
     addTerminForm.addEventListener("submit",async function(event) {

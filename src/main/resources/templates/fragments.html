@@ -2,6 +2,8 @@
   <html xmlns:th="http://www.thymeleaf.org" lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <head>
+    <title>Fragments</title>
+    <th:block th:insert="~{fragments :: resources}"></th:block>
   </head>
 <body>
 <!-- Resources (.css/.jss...etc)-->

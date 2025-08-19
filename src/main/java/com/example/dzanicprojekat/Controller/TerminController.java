@@ -1,11 +1,9 @@
 package com.example.dzanicprojekat.Controller;
 
-import com.example.dzanicprojekat.Entities.User;
 import com.example.dzanicprojekat.Services.FrizerService;
 import com.example.dzanicprojekat.Services.TerminService;
 import com.example.dzanicprojekat.Services.UslugeService;
 import com.example.dzanicprojekat.Utility.DTOs.TerminDTO;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
