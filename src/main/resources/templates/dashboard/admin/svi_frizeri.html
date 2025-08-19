@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Svi Frizeri</title>
+    <head th:replace="~{fragments::resources}"></head>
+</head>
+<body>
+<div th:replace="~{fragments::navbar}"></div>
+<main>
+    <div th:if="${session.user != null}" class="border-wrapper" >
+        <div class="main-wrapper">
+            <p th:replace="~{fragments :: dashboard_head}"></p>
+            <div class="content-wrapper">
+                <div th:replace=" ~{fragments :: role-buttons}"></div>
+                <div style="padding:2vw;justify-content: flex-start;" class="forms" >
+                    <div class="table_positioning">
+                        <div  style="width: 90%;" class="table_width">
+                            <div class="container">
+                                <table style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Ime i Prezime</th>
+                                        <th scope="col">Specijalizacija</th>
+                                        <th scope="col">Godine Iskustva</th>
+                                        <th scope="col">Broj Telefona</th>
+                                        <th scope="col">Dostupnost</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="user : ${user_data}">
+                                        <th th:text="${user.getId()}"></th>
+                                        <td th:text="${user.getUsername()}"></td>
+                                        <td th:text="${user.getIme() + ' ' +user.getPrezime()}"></td>
+                                        <td th:text="${user.getFrizer().getSpecijalizacija()}"></td>
+                                        <td th:text="${user.getFrizer().getGodineIskustva()}"></td>
+                                        <td th:text="${user.getBrojTelefona()}"></td>
+                                        <td th:text="${user.getFrizer().isAvailable()}"></td>
+                                        <td>
+                                            <form class="table-attribute" action="/obrisi_frizera_request" method="post">
+                                                <input type="hidden" name="id" th:value="${user.getId()}"/>
+                                                <button class="login" type="submit"><i>Delete</i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

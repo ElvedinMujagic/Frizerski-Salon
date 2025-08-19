@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dodaj Usluge</title>
+
+  <head th:replace="~{fragments::resources}"></head>
+</head>
+<body>
+<div th:replace="~{fragments::navbar}"></div>
+<main>
+  <div th:if="${session.user != null}" class="border-wrapper" >
+    <div class="main-wrapper">
+      <p th:replace="~{fragments :: dashboard_head}"></p>
+      <div class="content-wrapper">
+        <div th:replace=" ~{fragments :: role-buttons}"></div>
+        <div style="padding:2vw;justify-content: flex-start;" class="forms">
+          <div class="table_positioning">
+            <div  style="width: 90%;" class="table_width">
+              <div class="container">
+                <table style="width: 100%">
+                  <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Usluga</th>
+                    <th scope="col">Cijena(KM)</th>
+                    <th scope="col">Trajanje(min)</th>
+                    <th scope="col">Klijent</th>
+                    <th scope="col">Frizer</th>
+                    <th scope="col">Datum</th>
+                    <th scope="col">Prihvaćen?</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="termin : ${allTermin}">
+                    <td th:text="${termin.id}"></td>
+                    <td th:text="${termin.usluge.get(0).naziv}"></td>
+                    <td th:text="${termin.usluge.get(0).cijena}"></td>
+                    <td th:text="${termin.usluge.get(0).trajanje}"></td>
+                    <td th:text="${termin.user.ime + ' ' + termin.user.prezime}"></td>
+                    <td th:text="${termin.frizer.user.ime + ' ' + termin.frizer.user.prezime}"></td>
+                    <td th:text="${termin.getDatum_termina()}"></td>
+                    <td th:text="${termin.confirmed}"></td>
+                    <td>
+                      <form class="table-attribute" action="/obrisi_termin_request" method="post">
+                        <input type="hidden" name="id" th:value="${termin.getId()}"/>
+                        <button class="login" type="submit"><i>Delete</i></button>
+                      </form>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
