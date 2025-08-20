@@ -32,7 +32,20 @@ public class TerminService {
         return terminRepo.findAll();
     }
 
-    public void dodajTermin(TerminDTO terminDTO) {
+    public List<Termin> getAllFrizerTermins(String frizer_name) {
+        User user =  userService.getByUsername(frizer_name);
+        return terminRepo.findAllByFrizer(frizerService.getById(user.getId()));
+    }
+
+    public void cancelTermin(TerminDTO terminDTO) {
+        Termin termin = terminRepo.findById(terminDTO.getTerminId())
+                .orElseThrow(() -> new RuntimeException("ID Termina ne nalazi se u Bazi Podataka"));
+        termin.setCanceled(true);
+        termin.setCancellation_reason(terminDTO.getCancellation_reason());
+        terminRepo.save(termin);
+    }
+
+    public void addTermin(TerminDTO terminDTO) {
         User user = userService.getById(terminDTO.getUserId());
         Frizer frizer = frizerService.getById(terminDTO.getFrizerId());
         Usluga usluga = uslugeService.getById(terminDTO.getUslugeId());
@@ -45,6 +58,10 @@ public class TerminService {
         termin.setCijena(usluga.getCijena());
         termin.setDatum_termina(terminDTO.getDatum());
         terminRepo.save(termin);
+    }
+
+    public void deleteTermin(Long id) {
+        terminRepo.deleteById(id);
     }
 
 }
