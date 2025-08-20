@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 public class TerminDTO {
+    private Long terminId;
     private Long userId;
     @NotNull(message = "Morate odabrati frizera!")
     private Long frizerId;
