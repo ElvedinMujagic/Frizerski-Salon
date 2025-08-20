@@ -48,16 +48,12 @@
                             <div class="first_row">
                                 <div class="form-input">
                                     <label>Godine Iskustva</label>
-                                    <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
-                                         class="error-style" th:if="${#fields.hasErrors('godineIskustva')}" th:errors="*{godineIskustva}"></div>
+                                    <div class="error-style" th:if="${#fields.hasErrors('godineIskustva')}" th:errors="*{godineIskustva}"></div>
                                     <input type="number" th:field="*{godineIskustva}">
                                 </div>
                                 <div class="form-input">
                                     <label>Specijalizacija</label>
-                                    <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
-                                         class="error-style" th:if="${#fields.hasErrors('specijalizacija')}" th:errors="*{specijalizacija}"></div>
+                                    <div class="error-style" th:if="${#fields.hasErrors('specijalizacija')}" th:errors="*{specijalizacija}"></div>
                                     <input type="text" th:field="*{specijalizacija}">
                                 </div>
                             </div>
