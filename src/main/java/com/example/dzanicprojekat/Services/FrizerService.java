@@ -39,10 +39,6 @@ public class FrizerService {
         frizerRepo.save(frizer);
     }
 
-    public boolean checkById(Long id) {
-        return frizerRepo.existsById(id);
-    }
-
     public void deleteFrizer(Long id){
         Frizer frizer = frizerRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Frizer nije nadjen"));
