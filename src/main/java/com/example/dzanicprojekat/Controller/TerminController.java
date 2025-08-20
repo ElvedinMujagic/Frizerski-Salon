@@ -5,6 +5,7 @@ import com.example.dzanicprojekat.Services.TerminService;
 import com.example.dzanicprojekat.Services.UslugeService;
 import com.example.dzanicprojekat.Utility.DTOs.TerminDTO;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +42,14 @@ public class TerminController {
         return "/dashboard/client/zakazi_termin";
     }
 
+    @GetMapping("/frizer/zakazani_termini")
+    public String frizerZakazaniTermini(Authentication authentication, Model model) {
+        Object principal = authentication.getPrincipal();
+        model.addAttribute("termini",terminService.getAllFrizerTermins(principal.toString()));
+        model.addAttribute("terminDTO",new TerminDTO());
+        return "/dashboard/frizer/zakazani_termini";
+    }
+
     @GetMapping("/admin/svi_termini")
     public String sviTerminiAdmin(Model model) {
         model.addAttribute("title","Svi Termin");
@@ -54,13 +63,21 @@ public class TerminController {
             prepareModel(model);
             return "/dashboard/client/zakazi_termin";
         }
-        terminService.dodajTermin(terminDTO);
+        terminService.addTermin(terminDTO);
         return "redirect:/client/zakazi_termin";
     }
 
     @PostMapping("/obrisi_termin_request")
     public String deleteTermin(@Valid @RequestParam Long id) {
+        terminService.deleteTermin(id);
         return "redirect:/admin/svi_termini";
+    }
+
+
+    @PostMapping("/cancel_termin_request")
+    public String cancelTermin(@ModelAttribute TerminDTO terminDTO) {
+        terminService.cancelTermin(terminDTO);
+        return "redirect:/frizer/zakazani_termini";
     }
 
 
