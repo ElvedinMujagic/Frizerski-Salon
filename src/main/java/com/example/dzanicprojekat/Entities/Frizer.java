@@ -14,7 +14,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Frizer {
 
     @Id
-    private long id;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "id")

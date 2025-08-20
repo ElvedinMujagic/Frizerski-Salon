@@ -17,7 +17,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Admin {
 
     @Id
-    private long id;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "id")
