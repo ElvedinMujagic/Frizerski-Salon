@@ -1,0 +1,19 @@
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+}
+.overlay-content {
+    border: 3px solid goldenrod;
+    background: #171819;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    margin: 100px auto;
+    text-align: center;
+}
