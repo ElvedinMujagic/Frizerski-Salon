@@ -40,25 +40,16 @@ public class Termin {
     @JoinTable(
             name = "termin_usluga",
             joinColumns = @JoinColumn(name = "termin_id"),
-            inverseJoinColumns = @JoinColumn(name = "usluga_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "usluga_id"))
     private List<Usluga> usluge;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "frizer_id")
     private Frizer frizer;
-
-    // Ovo će stvoriti još jednu tabelu pod naziv "termin_usluga"
-    // U njoj se nalaze ID termina i ID usluge
-    // Na taj način spremamo više usluga u jedan termin aka;
-    // termin_id:1 <----> usluga_id:1
-    // termin_id:1 <----> usluga_id:2
-    // termin_id:2 <----> usluga_id:3
-
 
     @PrePersist
     protected void onCreate() {
