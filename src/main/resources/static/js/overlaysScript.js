@@ -1,17 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const openBtn = document.getElementById("openOverlayBtn");
-    const closeBtn = document.getElementById("closeOverlayBtn");
-    const overlay = document.getElementById("overlay");
-    const otkaziTermin = document.getElementById("cancelForm");
+    const openOtkaziBtn = document.getElementById("openOtkaziOverlayBtn");
+    const closeOtkaziBtn = document.getElementById("closeOtkaziOverlayBtn");
+    const otkazi_overlay = document.getElementById("otkazi_overlay");
+    const otkaziTermin = document.getElementById("otkaziForm");
 
-// Show overlay
-    openBtn.addEventListener("click", () => {
-        overlay.style.display = "block";
+    const openPotvrdiBtn = document.getElementById("greenBtn");
+    const closePotvrdiBtn = document.getElementById("closePotvrdiOverlay");
+    const potvrdi_overlay= document.getElementById("potvrdi_overlay");
+    const potvrdiTermin = document.getElementById("potvrdiForm");
+
+
+    openOtkaziBtn.addEventListener("click", () => {
+        otkazi_overlay.style.display = "block";
     });
 
-// Hide overlay
-    closeBtn.addEventListener("click", () => {
-        overlay.style.display = "none";
+    closeOtkaziBtn.addEventListener("click", () => {
+        otkazi_overlay.style.display = "none";
         otkaziTermin.reset();
+    });
+
+    openPotvrdiBtn.addEventListener("click", () => {
+        potvrdi_overlay.style.display = "block";
+    });
+
+    closePotvrdiBtn.addEventListener("click", () => {
+        potvrdi_overlay.style.display = "none";
+        potvrdiTermin.reset();
     });
 });
