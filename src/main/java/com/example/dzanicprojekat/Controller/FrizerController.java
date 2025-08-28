@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class FrizerController {
@@ -28,6 +29,7 @@ public class FrizerController {
     @GetMapping("/admin/svi_frizeri_page")
     public String getFrizers(Model model) {
         model.addAttribute("user_data",userService.getFrizersOnly());
+        model.addAttribute("title","Svi Frizeri");
         return "/dashboard/admin/svi_frizeri";
     }
 
@@ -40,16 +42,17 @@ public class FrizerController {
     }
 
     @PostMapping("/dodaj_frizera_request")
-    public String dodajFrizera(@Valid @ModelAttribute FrizerDTO frizerDTO, BindingResult result,Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("title","Dodaj Frizera");
-            return "/dashboard/admin/dodaj_frizera";
+    public String dodajFrizera(@Valid @ModelAttribute FrizerDTO frizerDTO, RedirectAttributes model) {
+        if(frizerDTO.getId()==null) {
+            model.addFlashAttribute("error","Unesite ID korisnika!");
+            return "redirect:/admin/dodaj_frizera_page";
         }
-        /* TODO: Napraviti validaciju za:
-        *   1.) Ako korisnik unese ID koji je zauzet/nepostoji
-        *   2.) Napraviti da koristi se Username ili ID
-        *   3.) Ako korisnik unese negativan broj */
-        System.out.println("TEST");
+
+        if(!frizerService.checkIfClient(frizerDTO.getId())) {
+            model.addFlashAttribute("error","Uneseni ID nije validan");
+            return "redirect:/admin/dodaj_frizera_page";
+        }
+
         frizerService.addFrizer(frizerDTO);
         return "redirect:/admin/dodaj_frizera_page";
     }
