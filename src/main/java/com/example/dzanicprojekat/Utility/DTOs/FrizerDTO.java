@@ -1,5 +1,7 @@
 package com.example.dzanicprojekat.Utility.DTOs;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
@@ -9,10 +11,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FrizerDTO {
-    @PositiveOrZero(message = "ID ne može da bude negativan broj")
     private Long id;
     private String specijalizacija;
-    @PositiveOrZero(message = "Iskustvno ne može da bude negativan broj")
     private int godineIskustva;
     private boolean available;
 }
