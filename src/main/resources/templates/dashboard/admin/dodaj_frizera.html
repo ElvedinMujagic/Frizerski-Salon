@@ -48,29 +48,25 @@
                             <div class="first_row">
                                 <div class="form-input">
                                     <label>Godine Iskustva</label>
-                                    <div class="error-style" th:if="${#fields.hasErrors('godineIskustva')}" th:errors="*{godineIskustva}"></div>
-                                    <input type="number" th:field="*{godineIskustva}">
+                                    <input type="number" th:field="*{godineIskustva}" min="0">
                                 </div>
                                 <div class="form-input">
-                                    <label>Specijalizacija</label>
-                                    <div class="error-style" th:if="${#fields.hasErrors('specijalizacija')}" th:errors="*{specijalizacija}"></div>
+                                    <label>Specijalizacija:</label>
                                     <input type="text" th:field="*{specijalizacija}">
                                 </div>
                             </div>
                             <div class="second_row">
                                 <div class="form-input">
-                                    <label>ID Korisnika</label>
-                                    <div style="color:red;font-family: 'Lato', sans-serif;
-                                  margin-bottom: 3px;font-size: 15px;min-width: 300px;"
-                                         class="error-style" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
-                                    <input type="number" th:field="*{id}">
+                                    <label>ID Korisnika:</label>
+                                    <input type="number" min="0" th:field="*{id}">
                                 </div>
                                 <div class="form-checkbox" style="margin-bottom:0">
-                                    <input type="checkbox" th:field="*{available}">
+                                    <input type="checkbox" th:field="*{available}" checked="checked">
                                     <label>Dostupan</label>
                                 </div>
                                 <div class="form-submit" style="text-align: left;">
                                     <button style="width: 80%;height: 30%;">Dodaj frizera</button>
+                                    <div><p class="error-style" th:text="${error}"></p></div>
                                 </div>
                             </div>
                         </form>
