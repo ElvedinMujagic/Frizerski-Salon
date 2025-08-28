@@ -22,6 +22,11 @@ public class FrizerService {
         return frizerRepo.findAllByAvailable(true);
     }
 
+    public boolean checkIfClient(Long id) {
+        User user = userRepo.readById(id);
+        return user.getRole() != Role.ADMIN && user.getRole() != Role.FRIZER;
+    }
+
     public Frizer getById(Long id) {
         return frizerRepo.readById(id);
     }
