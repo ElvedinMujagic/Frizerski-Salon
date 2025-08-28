@@ -43,9 +43,14 @@ public class UslugeController {
     }
 
     @PostMapping("/obrisi_uslugu")
-    public String obrisiUslugu(@Valid @RequestParam Long id) {
-        System.out.println("Delete Uslugu endpoint hit");
+    public String obrisiUslugu(@RequestParam Long id) {
         uslugeService.deleteUsluga(id);
+        return "redirect:/admin/sve_usluge";
+    }
+
+    @PostMapping("/stanje_usluge")
+    public String promjeniStanje(@RequestParam Long id,boolean active) {
+        uslugeService.promjeniStanje(id,active);
         return "redirect:/admin/sve_usluge";
     }
 }

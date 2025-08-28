@@ -1,9 +1,11 @@
 package com.example.dzanicprojekat.Utility.DTOs;
 
 import jakarta.validation.constraints.NotNull;
+import jdk.jfr.Timespan;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -17,6 +19,7 @@ public class TerminDTO {
     private Long uslugeId;
     @NotNull(message = "Morate odabrati datum!")
     private LocalDate datum;
+    private LocalTime time;
     private double cijena;
     private boolean confirmed;
     private boolean canceled;

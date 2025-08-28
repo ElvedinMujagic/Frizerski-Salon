@@ -35,10 +35,16 @@
                       <td th:text="${usluga.getCijena()}"></td>
                       <td th:text="${usluga.getTrajanje()}"></td>
                       <td th:text="${usluga.isActive()}"></td>
-                      <td>
-                        <form class="table-attribute" action="/obrisi_uslugu" method="post">
+                      <td style="display:flex;justify-content: center;gap: 1vw">
+                        <form class="table-attribute" action="/obrisi_uslugu" method="POST">
                           <input type="hidden" name="id" th:value="${usluga.getId()}"/>
                           <button class="login" type="submit"><i>Delete</i></button>
+                        </form>
+                        <form class="table-attribute" action="/stanje_usluge" method="POST">
+                          <input type="hidden" name="id" th:value="${usluga.getId()}"/>
+                          <input type="hidden" name="active" th:value="${usluga.active}"/>
+                          <button class="login" id="greenBtn" type="submit" th:if="${!usluga.active}"><i>Uključi</i></button>
+                          <button class="login" type="submit" th:if="${usluga.active}"><i>Isključi</i></button>
                         </form>
                       </td>
                     </tr>

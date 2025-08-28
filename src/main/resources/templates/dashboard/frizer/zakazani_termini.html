@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Zakazani Termini</title>
   <th:block th:insert="~{fragments :: resources}"></th:block>
+  <script th:if="${session.user != null }" th:src="@{/js/overlaysScript.js}"></script>
 </head>
 <body>
 <div th:replace="~{fragments::navbar}"></div>
@@ -37,12 +38,12 @@
                     <td th:text="${termin.user.ime + ' ' + termin.user.prezime}"></td>
                     <td th:text="${termin.datum_termina}"></td>
                     <td>
-                      <form th:object ="${terminDTO}" id="cancelForm"
+                      <form th:object ="${terminDTO}" id="otkaziForm"
                             class="table-attribute"
                             action="/cancel_termin_request"
-                            method="post">
-                        <button type="button" class="login" id="openOverlayBtn"><i>Otkazi termin</i></button>
-                        <div id="overlay" class="overlay">
+                            method="POST">
+                        <button type="button" id="openOtkaziOverlayBtn"><i>Otkazi</i></button>
+                        <div id="otkazi_overlay" class="overlay">
                           <div class="overlay-content">
                             <h2>Otkazivanje Termina</h2>
                             <label>Razlog otkazivanja:</label>
@@ -55,11 +56,39 @@
                             <input type="hidden"
                                    name="terminId"
                                    th:value="${termin.id}"/>
+                            <!-- Ovaj input za "canceled" nije potreban-->
                             <input type="hidden"
                                    th:field="*{canceled}"
                                    th:value="${true}"/>
+                            <button type="submit">Pošalji</button>
+                            <button type="button" id="closeOtkaziOverlayBtn">Zatvori</button>
+                          </div>
+                        </div>
+                      </form>
+                    </td>
+                    <td>
+                      <form th:object ="${terminDTO}"
+                            class="table-attribute"
+                            action="/potvrdi_termin_request"
+                            method="POST"
+                            id="potvrdiForm">
+                        <button type="button" id="greenBtn">Potvrdi</button>
+                        <div id="potvrdi_overlay" class="overlay">
+                          <div class="overlay-content">
+                            <h2>Potvrda Termina</h2>
+                            <label>Vrijeme termina:</label>
+                            <div class="form-input" style="margin-bottom: 0">
+                              <input type="time" onclick="this.showPicker()"
+                                     min="09:00"
+                                     max="17:00"
+                                     value="10:00"
+                                     th:field="*{time}"
+                                     class="form-input" id="time">
+                            </div>
+                            <br>
+                            <input type="hidden" name="terminId" th:value="${termin.id}"/>
                             <button type="submit">Potvrdi</button>
-                            <button type="button" id="closeOverlayBtn">Zatvori</button>
+                            <button type="button" id="closePotvrdiOverlay">Zatvori</button>
                           </div>
                         </div>
                       </form>
@@ -70,6 +99,7 @@
               </div>
             </div>
           </div>
+          <div><p class="error-style" th:text="${error}">Test</p></div>
         </div>
       </div>
     </div>

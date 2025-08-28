@@ -12,6 +12,21 @@
     rgb(255 122 122) 50%,
     rgb(180, 0, 0) 100%);
 }
+
+.table-attribute #greenBtn {
+    font: 13px "Lato", sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background: radial-gradient(circle,
+    rgb(0 200 25) 0%,
+    rgb(127 226 158) 50%,
+    rgb(9 255 0) 100%)
+}
 .table-attribute td,th,tbody,thead {
     padding:8px;
 

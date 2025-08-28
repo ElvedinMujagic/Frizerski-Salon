@@ -37,12 +37,10 @@ public class UslugeService {
         uslugeRepo.deleteById(id);
     }
 
-    public boolean checkById(Long id) {
-        return uslugeRepo.existsById(id);
-    }
-
-    public boolean checkByNaziv(String naziv) {
-        return uslugeRepo.existsByNaziv(naziv);
+    public void promjeniStanje(Long id,boolean active) {
+        Usluga usluga = uslugeRepo.readById(id);
+        usluga.setActive(!active);
+        uslugeRepo.save(usluga);
     }
 
     private Usluga convertToUsluga(UslugaDTO uslugaDTO) {
