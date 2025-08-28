@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="/css/overlays.css">
     <script th:if="${session.user != null }" th:src="@{/js/dropdowns.js}"></script>
     <script th:if="${session.user == null }" th:src="@{/js/scripts.js}"></script>
-    <script th:if="${session.user != null }" th:src="@{/js/overlaysScript.js}"></script>
   </div>
+
   <!-- Navigation bar Fragment-->
   <nav th:fragment="navbar" class="navbar">
     <div class="nav-left">
