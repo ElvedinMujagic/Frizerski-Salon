@@ -4,14 +4,35 @@
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/new-style.css">
-  <link rel="stylesheet" href="/css/dashboards.css">
-  <script src="/js/scripts.js"></script>
-  <script src="/js/dropdowns.js"></script>
+  <th:block th:insert="fragments :: resources"></th:block>
   <title>O nama</title>
 </head>
 <body>
   <div th:replace="~{fragments::navbar}"></div>
+
+ <main>
+     <div class="main-content-section">
+         <div class="main-content-card" style="max-width: 1400px">
+             <div class="kontakt-info">
+                 <img src="/images/makaze.png" alt="Cinque Terre" width="50" height="50">
+                 <h1>O nama</h1>
+                 <p>Naš frizerski salon 'Edo' je osnovan 2022. u gradu Bihaću gdje se trenutno nalazimo. Na prvom mjestu nam je naravno
+                     zadovoljstvo samih mušterija. Cilj nam je biti prvi u inovaciju novih frizura i novih ideja. Naš tim čine iskusni frizeri i stilisti koji se redovno usavršavaju i prate najnovije trendove.
+                     Svakom klijentu pristupamo individualno, slušamo njegove želje i predlažemo rješenja koja najbolje odgovaraju obliku lica, tipu kose i načinu života. Od samog početka cilj nam je bio da spojimo stručnost, kreativnost i toplu atmosferu u kojoj će se svako osjećati dobrodošlo.
+                     Vjerujemo da frizura nije samo detalj – ona je odraz vašeg stila i ličnosti. </p>
+             </div>
+
+             <hr>
+
+             <div class="scroll-container">
+                 <img src="/images/barber.jpg" alt="Cinque Terre" width="300" height="350">
+                 <img src="/images/barberhaircut2.jpg" alt="Cinque Terre" width="300" height="350">
+                 <img src="/images/barberhaircut.jpg" alt="Cinque Terre" width="350" height="350">
+                 <img src="/images/barberbackground.jpg" alt="Mountains" width="300" height="350">
+             </div>
+         </div>
+     </div>
+ </main>
 
 </body>
 </html>

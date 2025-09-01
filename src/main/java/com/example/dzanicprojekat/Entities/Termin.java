@@ -2,6 +2,7 @@ package com.example.dzanicprojekat.Entities;
 
 
 
+import com.example.dzanicprojekat.Utility.State;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -21,21 +22,15 @@ public class Termin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false,updatable = false)
     private LocalDateTime createdAt;
     private LocalDate datum_termina;
     private LocalTime pocetak_termina;
     private double cijena;
-    @ColumnDefault("0.0")
-    private double popust;
-    @ColumnDefault("0")
-    private boolean confirmed;
-    @ColumnDefault("0")
-    private boolean canceled;
+    @Enumerated(EnumType.STRING)
+    private State state;
     @ColumnDefault("'N/A'")
     private String cancellation_reason;
-
     @ManyToMany()
     @JoinTable(
             name = "termin_usluga",
@@ -46,13 +41,12 @@ public class Termin {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
     @ManyToOne
     @JoinColumn(name = "frizer_id")
     private Frizer frizer;
-
     @PrePersist
     protected void onCreate() {
+        this.state = State.Unconfirmed;
         this.createdAt = LocalDateTime.now();
         this.pocetak_termina = LocalTime.MIDNIGHT;
         this.datum_termina = LocalDate.now();

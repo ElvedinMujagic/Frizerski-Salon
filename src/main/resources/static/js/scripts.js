@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         registerForm.reset();
     })
+
+
+
     // Zatvara overlay klikom izvana ili dugmetom ESC
     window.addEventListener("click", function (e) {
         // Zatvara overlay klikom na dugme login
@@ -48,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loginForm.addEventListener("submit", async function(event) {
         event.preventDefault();
         const formData = new FormData(loginForm);
-        const response = await fetch("/login", {
+            const response = await fetch("/login", {
             method:"POST",
             body:formData,
         })

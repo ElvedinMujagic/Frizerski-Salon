@@ -39,9 +39,15 @@
                     <td th:text="${termin.user.ime + ' ' + termin.user.prezime}"></td>
                     <td th:text="${termin.frizer.user.ime + ' ' + termin.frizer.user.prezime}"></td>
                     <td th:text="${termin.datum_termina}"></td>
-                    <td th:text="${termin.confirmed}"></td>
+                    <td th:with="State=${T(com.example.dzanicprojekat.Utility.State)}">
+                      <span th:switch="${termin.state}"      style="font-weight: bold">
+                        <span th:case="${State.Canceled}"    style="color: red">Otkazano</span>
+                        <span th:case="${State.Unconfirmed}" style="color: orange">Nije Potvrđeno</span>
+                        <span th:case="${State.Confirmed}"   style="color: lawngreen">Potvrđeno</span>
+                      </span>
+                    </td>
                     <td>
-                      <form class="table-attribute" action="/obrisi_termin_request" method="post">
+                      <form class="table-attribute" action="/obrisi_termin_request" method="POST">
                         <input type="hidden" name="id" th:value="${termin.id}"/>
                         <button class="login" type="submit"><i>Delete</i></button>
                       </form>

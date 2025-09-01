@@ -4,6 +4,7 @@ import com.example.dzanicprojekat.Entities.User;
 import com.example.dzanicprojekat.Repositories.UserRepo;
 import com.example.dzanicprojekat.Utility.DTOs.LoginDTO;
 import com.example.dzanicprojekat.Utility.DTOs.RegisterDTO;
+import com.example.dzanicprojekat.Utility.DTOs.UpdateUserDTO;
 import com.example.dzanicprojekat.Utility.Role;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -25,10 +26,47 @@ import java.util.List;
 @AllArgsConstructor
 public class UserService {
 
+    private final FrizerService frizerService;
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
 
-    public User registerUser(RegisterDTO registerDTO) {
+    public int changePassword(User user,String new_pass,String conf_pass) {
+        if(new_pass.length() < 6 || conf_pass.length() < 6) {
+            return -1;
+        }
+
+        if(!new_pass.equals(conf_pass)) {
+            return 0;
+        }
+        String nova_sifra = passwordEncoder.encode(new_pass);
+        user.setHash(nova_sifra);
+        userRepo.save(user);
+        return 1;
+    }
+
+    public User updateUser(User user,UpdateUserDTO dto){
+
+        if(dto.getUsername() != null && !dto.getUsername().isBlank())
+            user.setUsername(dto.getUsername());
+
+        if(dto.getIme() != null && !dto.getIme().isBlank())
+            user.setIme(dto.getIme());
+
+        if(dto.getPrezime() != null && !dto.getPrezime().isBlank())
+            user.setPrezime(dto.getPrezime());
+
+        if(dto.getSpol() != null && !dto.getSpol().isBlank())
+            user.setSpol(dto.getSpol());
+
+        if(dto.getBrojTelefona() != null && !dto.getBrojTelefona().isBlank())
+            user.setBrojTelefona(dto.getBrojTelefona());
+
+        userRepo.save(user);
+        updateSession(user);
+        return user;
+    }
+
+    public User addUser(RegisterDTO registerDTO) {
         User newUser = convertToUser(registerDTO);
         return userRepo.save(newUser);
     }
@@ -97,5 +135,11 @@ public class UserService {
         user.setSpol(request.getSpol());
         user.setBrojTelefona("");
         return user;
+    }
+
+    private void updateSession(User user){
+        List<GrantedAuthority> authorityList = List.of(new SimpleGrantedAuthority("ROLE_"+user.getRole()));
+        Authentication auth = new UsernamePasswordAuthenticationToken(user.getUsername(), null, authorityList);
+        SecurityContextHolder.getContext().setAuthentication(auth);
     }
 }

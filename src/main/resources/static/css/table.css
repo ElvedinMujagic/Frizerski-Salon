@@ -76,3 +76,56 @@ button:hover {
     justify-content: space-between;
     flex-direction: row-reverse;
 }
+
+
+.section-overlay-cijene {
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgb(255 255 255);
+    width: 50%;
+    background: #000000;
+    padding: 40px;
+    text-align: center;
+}
+
+.section-overlay-cijene h1 {
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: silver;
+}
+
+.cijene-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tabela {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 700px;
+    font-size: 18px;
+    background: radial-gradient(circle,
+    rgba(181, 181, 181, 1) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(150, 150, 150, 1) 100%);    border-radius: 10px;
+    overflow: hidden;
+    color: black;
+}
+
+.tabela th, .tabela td {
+    padding: 12px;
+    border-bottom: none
+}
+
+.tabela thead {
+    background: linear-gradient(323deg,
+    rgba(214, 154, 2, 1) 0%,
+    rgba(237, 202, 138, 1) 50%,
+    rgba(214, 154, 2, 1) 100%);
+}
+
+@media (max-width: 600px) {
+    .tabela {
+        font-size: 16px;
+    }
+}

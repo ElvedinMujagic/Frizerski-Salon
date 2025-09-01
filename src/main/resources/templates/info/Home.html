@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments::resources}">
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <th:block th:insert="fragments :: resources"></th:block>
+  <title>Home</title>
+</head>
+<body>
+<div th:replace="~{fragments::navbar}"></div>
+
+<main>
+  <div class="main-content-section">
+    <div class="main-content-card" style="max-width: 1400px">
+      <div class="main-content-info">
+        <img src="/images/makaze.png" alt="Cinque Terre" width="50" height="50">
+        <h1>Dobrodošli</h1>
+        <p>Dobrodošli u Frizerski salon 'Edo' – mjesto gdje vaša kosa postaje umjetnost!
+          Od trenutka kada zakoračite u naš salon, cilj nam je da se osjećate posebno i opušteno.
+          Naš tim iskusnih frizera i stilista prati najnovije trendove,
+          kombinira stručnost s kreativnošću i brine da svaka frizura bude savršeno prilagođena vašem stilu i osobnosti.
+          Bilo da tražite klasičnu šišanje, modernu frizuru ili stiliziranje za posebnu priliku,
+          ovdje ćete pronaći profesionalan pristup, toplu atmosferu i rezultat koji će vas oduševiti.
+          Vaša kosa zaslužuje pažnju i kvalitetu – i upravo to nudimo u Frizerskom salonu 'Edo'.
+          Posjetite nas i doživite razliku!</p>
+      </div>
+
+      <hr>
+
+      <div>
+        <img src="/images/test.jpg" width="100" height="100">
+        <h2>Radno vrijeme</h2>
+
+        <p><strong>Ponedjeljak – Petak:</strong> 09:00 – 18:00</p>
+        <p><strong>Nedjelja:</strong> Zatvoreno</p>
+        <p><strong>Praznici:</strong> Neradni</p>
+
+        <p>Naši termini se popunjavaju brzo, zato preporučujemo da unaprijed rezervišete svoj dolazak.
+          Da bi se rezervisali potrebno je registrirati se na stranici.
+          Radujemo se što ćemo vas ugostiti i pomoći da vaša kosa uvijek izgleda savršeno!</p>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

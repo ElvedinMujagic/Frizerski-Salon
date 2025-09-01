@@ -5,6 +5,7 @@ import com.example.dzanicprojekat.Services.FrizerService;
 import com.example.dzanicprojekat.Services.TerminService;
 import com.example.dzanicprojekat.Services.UslugeService;
 import com.example.dzanicprojekat.Utility.DTOs.TerminDTO;
+import com.example.dzanicprojekat.Utility.State;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -50,7 +51,7 @@ public class TerminController {
     @GetMapping("/frizer/zakazani_termini")
     public String frizerZakazaniTermini(Authentication authentication, Model model) {
         Object principal = authentication.getPrincipal();
-        model.addAttribute("termini",terminService.getAllFrizerTermins(principal.toString(),false));
+        model.addAttribute("termini",terminService.getAllFrizerTermins(principal.toString(),State.Unconfirmed));
         model.addAttribute("terminDTO",new TerminDTO());
         model.addAttribute("title","Zakazani termin");
         return "/dashboard/frizer/zakazani_termini";
@@ -59,7 +60,7 @@ public class TerminController {
     @GetMapping("/frizer/odobreni_termini")
     public String frizerOdobreniTermini(Authentication authentication, Model model) {
         Object principal = authentication.getPrincipal();
-        List<Termin> termini = terminService.getAllFrizerTermins(principal.toString(),true);
+        List<Termin> termini = terminService.getAllFrizerTermins(principal.toString(),State.Confirmed);
         termini.removeIf(t -> t.getDatum_termina().isBefore(LocalDate.now().minusDays(1)));
         model.addAttribute("termini",termini);
         model.addAttribute("terminDTO",new TerminDTO());
@@ -102,12 +103,12 @@ public class TerminController {
         LocalTime time = terminDTO.getTime();
 
         if(time==null) {
-            model.addFlashAttribute("error","Unesite ispravno vrijeme 09:00 - 17:00");
+            model.addFlashAttribute("error","Unesite ispravno vrijeme 09:00 - 18:00");
             return "redirect:/frizer/zakazani_termini";
         }
 
-        if(time.isBefore(LocalTime.parse("09:00")) || time.isAfter(LocalTime.parse("17:00"))) {
-            model.addFlashAttribute("error","Unesite ispravno vrijeme 09:00 - 17:00");
+        if(time.isBefore(LocalTime.parse("09:00")) || time.isAfter(LocalTime.parse("18:00"))) {
+            model.addFlashAttribute("error","Unesite ispravno vrijeme 09:00 - 18:00");
             return "redirect:/frizer/zakazani_termini";
         }
         

@@ -21,5 +21,4 @@ public class UslugaDTO {
     @Min(value = 1, message = "Trajanje mora biti najkraće 1 minuta")
     private int trajanje;
     private boolean active;
-
 }

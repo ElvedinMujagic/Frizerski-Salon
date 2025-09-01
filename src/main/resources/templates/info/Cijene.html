@@ -4,14 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/new-style.css">
-    <link rel="stylesheet" href="/css/dashboards.css">
-    <script src="/js/scripts.js"></script>
-    <script src="/js/dropdowns.js"></script>
+    <th:block th:insert="fragments :: resources"></th:block>
     <title>Cijene</title>
 </head>
 <body>
     <div th:replace="~{fragments::navbar}"></div>
 
+    <main style="display: flex;justify-content: center;padding-top: 20px">
+        <div class="section-overlay-cijene">
+            <img src="/images/makaze.png" alt="Cinque Terre" width="50" height="50">
+            <div class="cijene-content">
+                <h1>Cijene usluga</h1>
+                <table class="tabela">
+                    <thead>
+                        <tr>
+                            <th style="border: none">Usluga</th>
+                            <th style="border: none">Cijena</th>
+                            <th style="border: none">Trajanje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="usluga : ${usluge}">
+                            <td th:text="${usluga.naziv}"></td>
+                            <td th:text="${usluga.cijena} + ' KM'"></td>
+                            <td th:text="${usluga.trajanje} + ' MIN'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

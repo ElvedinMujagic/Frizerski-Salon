@@ -8,17 +8,57 @@
 
 
 <div th:replace="~{fragments :: navbar}"></div>
-
 <main>
   <div th:if="${session.user != null}" class="border-wrapper" >
     <div class="main-wrapper">
       <p th:replace="~{fragments :: dashboard_head}"></p>
       <div class="content-wrapper">
         <div th:replace=" ~{fragments :: role-buttons}"></div>
-        <div style="padding:5vw;" class="forms">
-          <form th:replace="~{fragments :: edit_profile_form}">
+        <div style="padding:2vw;" class="forms">
+          <div class="table_width">
+            <form th:object="${data}" action="/update_user_profile" method="POST">
+              <div class="form-input">
+                <label>Username</label>
+                <div><p class="error-style" th:text="${error}"></p></div>
+                <input th:field="*{username}" type="text">
+              </div>
+              <div class="form-input">
+                <label>First Name</label>
+                <input th:field="*{ime}" type="text">
+              </div>
+              <div class="form-input">
+                <label>Last Name</label>
+                <input th:field="*{prezime}" type="text">
+              </div>
+              <div class="form-input">
+                <label>Broj Telefona</label>
+                <input type="tel" id="phone" th:field="*{brojTelefona}" placeholder="874-423-321" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}">
+              </div>
+              <div class="form-input" th:if="${session.user.role.toString() == 'FRIZER'}">
+                <label>Specijalizacija:</label>
+                <input type="text" th:field="*{specijalizacija}">
+              </div>
+              <div class="form-input">
+                <div class="licni-podatci">
+                  <label>Spol</label>
+                  <select th:field="*{spol}">
+                    <option value="Muškarac">Muškarac</option>
+                    <option value="Žena">Žena</option>
+                  </select>
+                </div>
+              </div>
 
-          </form>
+              <div class="form-checkbox" style="margin-bottom:0" th:if="${session.user.role.toString() == 'FRIZER'}">
+                <input type="checkbox" name="available" th:checked="${session.user.available}">
+                <label>Dostupan</label>
+              </div>
+
+              <div class="form-submit" style="text-align: left;">
+                <div><p class="error-style" style="color:limegreen" th:text="${changed}"></p></div>
+                <button style="width: 30%;height: 70%;">Sačuvaj</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

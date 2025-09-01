@@ -6,6 +6,7 @@ import com.example.dzanicprojekat.Entities.User;
 import com.example.dzanicprojekat.Entities.Usluga;
 import com.example.dzanicprojekat.Repositories.TerminRepo;
 import com.example.dzanicprojekat.Utility.DTOs.TerminDTO;
+import com.example.dzanicprojekat.Utility.State;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +33,9 @@ public class TerminService {
         return terminRepo.findAll();
     }
 
-    public List<Termin> getAllFrizerTermins(String frizer_name,boolean confirmed) {
+    public List<Termin> getAllFrizerTermins(String frizer_name,State state) {
         User user =  userService.getByUsername(frizer_name);
-        return terminRepo.findAllByFrizerAndConfirmed(frizerService.getById(user.getId()),confirmed);
+        return terminRepo.findAllByFrizerAndState(frizerService.getById(user.getId()),state);
     }
 
     public List<Termin> getAllUserTermins(String username) {
@@ -45,8 +46,7 @@ public class TerminService {
     public void cancelTermin(TerminDTO terminDTO) {
         Termin termin = terminRepo.findById(terminDTO.getTerminId())
                 .orElseThrow(() -> new RuntimeException("ID Termina ne nalazi se u Bazi Podataka"));
-        termin.setCanceled(true);
-        termin.setConfirmed(false);
+        termin.setState(State.Canceled);
         termin.setCancellation_reason(terminDTO.getCancellation_reason());
         terminRepo.save(termin);
     }
@@ -54,9 +54,8 @@ public class TerminService {
     public void potvrdiTermin(TerminDTO terminDTO) {
         Termin termin = terminRepo.findById(terminDTO.getTerminId())
                 .orElseThrow(() -> new RuntimeException("ID Termina ne nalazi se u Bazi Podataka"));
-        termin.setConfirmed(true);
+        termin.setState(State.Confirmed);
         termin.setPocetak_termina(terminDTO.getTime());
-        termin.setCanceled(false);
         terminRepo.save(termin);
     }
 

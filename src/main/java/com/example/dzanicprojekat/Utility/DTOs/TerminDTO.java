@@ -1,7 +1,6 @@
 package com.example.dzanicprojekat.Utility.DTOs;
 
 import jakarta.validation.constraints.NotNull;
-import jdk.jfr.Timespan;
 import lombok.*;
 
 import java.time.LocalDate;

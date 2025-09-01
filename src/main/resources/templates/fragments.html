@@ -22,7 +22,7 @@
   <!-- Navigation bar Fragment-->
   <nav th:fragment="navbar" class="navbar">
     <div class="nav-left">
-      <img th:src="@{/images/Logo.png}" alt="Logo">
+      <a href="/"><img th:src="@{/images/Logo.png}" alt="Logo"></a>
     </div>
 
     <div class="nav-right-wrapper">
@@ -31,7 +31,6 @@
           <li><a href="/info/onama">O nama</a></li>
           <li><a href="/info/kontakt">Kontakt</a></li>
           <li><a href="/info/cijene">Cijene</a></li>
-          <li><a href="/info/termini">Termini</a></li>
         </ul>
       </div>
       <!-- Ako nije prijavljen korisnik prikaži Login/Registracija -->
@@ -57,23 +56,9 @@
                     <label>Password</label>
                     <input type="password" name="password" id="login-password" placeholder="Password">
                   </div>
-                  <div class="form-checkbox">
-                    <input type="checkbox" id="remember-me">
-                    <label>Zapamti me</label>
-                    <a href="#">Zaboravili ste šifru?</a>
-                  </div>
-                  <div class="error-style" id="error-login">Test</div>
+                  <div class="error-style" id="error-login"></div>
                   <div class="form-submit">
                     <button>Prijavi se</button>
-                  </div>
-                  <div class="alternative-login">
-                    <hr>
-                    <div class="form-submit">
-                      <button>Gmail</button>
-                    </div>
-                    <div class="form-submit">
-                      <button>Mac</button>
-                    </div>
                   </div>
                 </div>
               </form>
@@ -214,10 +199,10 @@
     </ul>
     <ul th:if="${session.user.role.toString() == 'FRIZER'}">
       <li>
-        <a>Edit profile</a>
+        <a href="/general/edit_profile">Edit profile</a>
       </li>
       <li>
-        <a href="#" >Settings</a>
+        <a href="/general/settings" >Settings</a>
       </li>
       <li>
         <a href="/frizer/zakazani_termini">Zakazani termin</a>

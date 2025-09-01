@@ -6,6 +6,7 @@ import com.example.dzanicprojekat.Entities.User;
 import com.example.dzanicprojekat.Repositories.FrizerRepo;
 import com.example.dzanicprojekat.Repositories.UserRepo;
 import com.example.dzanicprojekat.Utility.DTOs.FrizerDTO;
+import com.example.dzanicprojekat.Utility.DTOs.UpdateUserDTO;
 import com.example.dzanicprojekat.Utility.Role;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,15 @@ public class FrizerService {
         User user = frizer.getUser();
         user.setRole(Role.CLIENT);
         user.setFrizer(null);
+    }
+
+    public void updateFrizer(User user, UpdateUserDTO dto) {
+        Frizer frizer = frizerRepo.readById(user.getId());
+        if(dto.getSpecijalizacija() != null && !dto.getSpecijalizacija().isBlank())
+            frizer.setSpecijalizacija(dto.getSpecijalizacija());
+
+        frizer.setAvailable(dto.isAvailable());
+        frizerRepo.save(frizer);
     }
 
     public FrizerService(FrizerRepo frizerRepo, UserRepo userRepo) {

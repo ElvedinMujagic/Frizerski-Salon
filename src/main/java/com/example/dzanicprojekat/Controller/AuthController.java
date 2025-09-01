@@ -39,8 +39,6 @@ public class AuthController {
     }
 
 
-
-
     @ResponseBody
     @PostMapping("/register")
     public ResponseEntity<?> processRegistration(@Valid @ModelAttribute RegisterDTO request,
@@ -70,7 +68,7 @@ public class AuthController {
 
         Map<String,String> response = new HashMap<>();
         try {
-            User savedUser = userService.registerUser(request);
+            User savedUser = userService.addUser(request);
             System.out.println("Saved User ID: " + savedUser.getId() +
                                "\nSaved User Username: " + savedUser.getUsername());
             response.put("redirect","/");

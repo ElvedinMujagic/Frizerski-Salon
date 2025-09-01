@@ -30,7 +30,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr th:each="termin : ${termini}" th:if="${!termin.canceled and !termin.confirmed}">
+                  <tr th:each="termin : ${termini}">
                     <th th:text="${termin.id}"></th>
                     <td th:text="${termin.usluge.get(0).naziv}"></td>
                     <td th:text="${termin.usluge.get(0).cijena}"></td>
@@ -99,7 +99,7 @@
               </div>
             </div>
           </div>
-          <div><p class="error-style" th:text="${error}">Test</p></div>
+          <div><p class="error-style" th:text="${error}"></p></div>
         </div>
       </div>
     </div>
